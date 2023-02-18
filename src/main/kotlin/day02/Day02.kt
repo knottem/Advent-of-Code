@@ -5,7 +5,9 @@ import java.io.File
 //https://adventofcode.com/2022/day/2
 class Day02(text : String = "input.txt") {
 
-    private val input = File("src/main/resources/02/$text").readLines().toList()
+    private val day = "02"
+
+    private val input = File("src/main/resources/$day/$text").readLines().toList()
 
     private fun gameOfRps(text : String): Int {
         var sum = 0

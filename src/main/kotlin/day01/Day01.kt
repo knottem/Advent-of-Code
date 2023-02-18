@@ -4,7 +4,8 @@ import java.io.File
 //https://adventofcode.com/2022/day/1
 class Day01(text : String = "input.txt") {
 
-    private val input = "src/main/resources/01/$text"
+    private val day = "01"
+    private val input = "src/main/resources/$day/$text"
 
     private fun getTextAsInt(text : String): List<List<Int>> {
         val file = File(text)

@@ -17,5 +17,6 @@ I would like to thank Eric Wastl for creating Advent of Code and providing such 
 ## Disclaimer
 
 These solutions were created solely for personal learning and entertainment purposes. They may not be the most efficient or optimal solutions, and should not be used for any production or commercial purposes. The solutions are provided as-is, without any warranty or guarantee of accuracy or correctness.
+Some Solutions are not mine, but I have added them to my repository for my own learning purposes. I have added the original author's name/link to the solution in the file itself.
 
 By Erik(Knottem)
