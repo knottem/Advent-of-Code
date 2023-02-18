@@ -4,7 +4,7 @@ This repository contains my solutions to the Advent of Code 2022 challenges. Adv
 
 ## How to Use this Repository
 
-Each day's puzzle has its own directory, named according to the day of the month (e.g., day01/, day02/, etc.). Within each directory, you will find the solution code and any supporting files that were necessary to solve the puzzle.
+Each day's puzzle has its own directory, named according to the day of the month (e.g., day01/, day02/, etc.). Within each directory, you will find the solution code for the puzzle. The code is written in Kotlin.
 
 ## About Advent of Code
 
