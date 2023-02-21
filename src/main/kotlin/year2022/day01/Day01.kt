@@ -1,11 +1,11 @@
-package day01
+package year2022.day01
 
 import java.io.File
 //https://adventofcode.com/2022/day/1
 class Day01(text : String = "input.txt") {
 
     private val day = "01"
-    private val input = "src/main/resources/$day/$text"
+    private val input = "src/main/resources/2022/$day/$text"
 
     private fun getTextAsInt(text : String): List<List<Int>> {
         val file = File(text)

@@ -1,4 +1,4 @@
-package day03
+package year2022.day03
 
 import java.io.File
 
@@ -6,7 +6,7 @@ import java.io.File
 class Day03(text : String = "input.txt") {
 
     private val day = "03"
-    private val input = File("src/main/resources/$day/$text").readLines().asSequence()
+    private val input = File("src/main/resources/2022/$day/$text").readLines().asSequence()
 
     //code by https://github.com/osipxd/advent-of-code-2022/blob/main/src/Day03.kt
     private fun Sequence<List<String>>.sumOfPriorities(): Int {
