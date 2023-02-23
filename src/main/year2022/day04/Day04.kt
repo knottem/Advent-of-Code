@@ -14,9 +14,4 @@ class Day04(text : String = "input.txt") {
     fun part1(): Int = input.count{ (a, b) -> b in a || a in b }
     fun part2(): Int = input.count{ (a, b) -> a.first in b || b.first in a }
 }
-fun main() {
-    val day = Day04()
-    println(day.part1())
-    println(day.part2())
-}
 
