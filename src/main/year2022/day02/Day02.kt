@@ -7,7 +7,7 @@ class Day02(text : String = "input.txt") {
 
     private val day = "02"
 
-    private val input = File("src/main/resources/2022/$day/$text").readLines().toList()
+    private val input = File("src/resources/2022/$day/$text").readLines().toList()
 
     private fun gameOfRps(text : String): Int {
         var sum = 0

@@ -5,7 +5,7 @@ import java.io.File
 class Day04(text : String = "input.txt") {
 
     private val day = "04"
-    private val input = File("src/main/resources/2022/$day/$text").readLines().asSequence().map { s ->
+    private val input = File("src/resources/2022/$day/$text").readLines().asSequence().map { s ->
         s.split(",").map { r ->
         val (a , b) = r.split("-").map { it.toInt() }
         a..b

@@ -6,7 +6,7 @@ import java.io.File
 //https://adventofcode.com/2022/day/10
 class Day10(text : String = "input.txt") {
 
-    private val input = File("src/main/resources/2022/10/$text").readLines().toList()
+    private val input = File("src/resources/2022/10/$text").readLines().toList()
 
     private val set = setOf(20, 60, 100, 140, 180, 220)
 

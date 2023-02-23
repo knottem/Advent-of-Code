@@ -1,3 +1,5 @@
+package main
+
 import java.io.File
 
 class DayTemplate(text : String = "input.txt") {
