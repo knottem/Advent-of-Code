@@ -3,9 +3,6 @@ package main.year2019.day03
 import java.io.File
 import kotlin.math.abs
 
-
-data class Intersection(val x: Int, val y: Int)
-
 class Day03(text : String = "input.txt") {
 
     private val day = "03"
@@ -43,10 +40,3 @@ class Day03(text : String = "input.txt") {
 
 
 }
-
-fun main() {
-    val day = Day03()
-    println(day.part1())
-    println(day.part2())
-}
-
