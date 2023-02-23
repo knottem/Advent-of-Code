@@ -36,8 +36,8 @@ class AocTests2022 {
     fun day04Tests(){
         // test file
         val aocDay04 = Day04("test.txt")
-        //Assert.assertEquals(aocDay04.part1(), 2)
-        //Assert.assertEquals(aocDay04.part2(), 0)
+        Assert.assertEquals(aocDay04.part1(), 2)
+        Assert.assertEquals(aocDay04.part2(), 4)
     }
 
     @Test
