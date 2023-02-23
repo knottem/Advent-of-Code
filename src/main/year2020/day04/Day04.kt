@@ -39,10 +39,3 @@ class Day04(text : String = "passports.txt") {
     fun part2(): Int = input.count { c -> validCheck.all { f -> c.contains(f) && valid(c)}}
 
 }
-
-fun main() {
-val day04 = Day04()
-    println("Part 1: ${day04.part1()}")
-    println("Part 2: ${day04.part2()}")
-}
-
