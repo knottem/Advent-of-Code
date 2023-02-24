@@ -4,54 +4,56 @@ import year2022.day02.Day02
 import year2022.day03.Day03
 import year2022.day04.Day04
 import year2022.day10.Day10
-import org.testng.Assert
+import org.testng.Assert.*
 import org.testng.annotations.Test
+import year2022.day06.Day06
 
 class AocTests2022 {
 
     @Test
     fun day01Tests(){
-        // test file
         val aocDay01 = Day01("test.txt")
-        Assert.assertEquals(aocDay01.part1(), 30)
-        Assert.assertEquals(aocDay01.part2(), 50)
+        assertEquals(aocDay01.part1(), 30)
+        assertEquals(aocDay01.part2(), 50)
     }
 
     @Test
     fun day02Tests(){
-        // test file
         val aocDay02 = Day02("test.txt")
-        Assert.assertEquals(aocDay02.part1(), 15)
-        Assert.assertEquals(aocDay02.part2(), 12)
+        assertEquals(aocDay02.part1(), 15)
+        assertEquals(aocDay02.part2(), 12)
     }
 
     @Test
     fun day03Tests(){
-        // test file
         val aocDay03 = Day03("test.txt")
-        Assert.assertEquals(aocDay03.part1(), 157)
-        Assert.assertEquals(aocDay03.part2(), 70)
+        assertEquals(aocDay03.part1(), 157)
+        assertEquals(aocDay03.part2(), 70)
     }
 
     @Test
     fun day04Tests(){
-        // test file
         val aocDay04 = Day04("test.txt")
-        Assert.assertEquals(aocDay04.part1(), 2)
-        Assert.assertEquals(aocDay04.part2(), 4)
+        assertEquals(aocDay04.part1(), 2)
+        assertEquals(aocDay04.part2(), 4)
     }
 
     @Test
     fun day05Tests(){
-        // test file
         val aocDay05 = Day05("test.txt")
-        Assert.assertEquals(aocDay05.part1(), "CMZ")
-        Assert.assertEquals(aocDay05.part2(), "MCD")
+        assertEquals(aocDay05.part1(), "CMZ")
+        assertEquals(aocDay05.part2(), "MCD")
+    }
+
+    @Test
+    fun day06Tests(){
+        val aocDay06 = Day06("test.txt")
+        assertEquals(aocDay06.part1(),5)
+        assertEquals(aocDay06.part2(), 23)
     }
 
     @Test
     fun day10Tests(){
-        // test file
         val aocDay10 = Day10("test.txt")
         val string : String =
                     "##..##..##..##..##..##..##..##..##..##..\n" +
@@ -60,8 +62,8 @@ class AocTests2022 {
                     "#####.....#####.....#####.....#####.....\n" +
                     "######......######......######......####\n" +
                     "#######.......#######.......#######....."
-        Assert.assertEquals(aocDay10.part1(), 13140)
-        Assert.assertEquals(aocDay10.part2(), string)
+        assertEquals(aocDay10.part1(), 13140)
+        assertEquals(aocDay10.part2(), string)
     }
 
 }
