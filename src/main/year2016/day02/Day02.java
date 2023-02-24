@@ -22,8 +22,17 @@ public class Day02 {
         }
     }
 
-    static int[][] key = { { 1, 2, 3}, { 4, 5, 6}, {7, 8, 9}};
-    static int[][] key2 = { { 0, 0, 1, 0, 0}, { 0, 2, 3, 4, 0}, {5, 6, 7, 8, 9}, { 0, 10, 11, 12, 0}, { 0, 0, 13, 0, 0}};
+    static int[][] key = {
+            { 1, 2, 3},
+            { 4, 5, 6},
+            { 7, 8, 9}};
+    // 11 = A, 12 = B, 13 = C, 14 = D
+    static int[][] key2 = {
+            { 0, 0, 1, 0, 0},
+            { 0, 2, 3, 4, 0},
+            { 5, 6, 7, 8, 9},
+            { 0, 10, 11, 12, 0},
+            { 0, 0, 13, 0, 0}};
 
     public String part1() {
         List<Integer> coordinates = new ArrayList<>();
@@ -60,50 +69,30 @@ public class Day02 {
         return result.get();
     }
 
-    public String part2() {
-        List<Integer> coordinates = new ArrayList<>();
-        coordinates.add(0);
-        coordinates.add(2);
-        AtomicReference<String> result = new AtomicReference<>("");
-        input.forEach(s -> {
-            for (int i = 0; i < s.length(); i++) {
-                switch (s.charAt(i)) {
-                    case 'U' -> {
-                        if (coordinates.get(1) > 0 && key2[coordinates.get(1) - 1][coordinates.get(0)] != 0) {
-                            coordinates.set(1, coordinates.get(1) - 1);
-                        }
-                    }
-                    case 'D' -> {
-                        if (coordinates.get(1) < 4 && key2[coordinates.get(1) + 1][coordinates.get(0)] != 0) {
-                            coordinates.set(1, coordinates.get(1) + 1);
-                        }
-                    }
-                    case 'L' -> {
-                        if (coordinates.get(0) > 0 && key2[coordinates.get(1)][coordinates.get(0) - 1] != 0) {
-                            coordinates.set(0, coordinates.get(0) - 1);
-                        }
-                    }
-                    case 'R' -> {
-                        if (coordinates.get(0) < 4 && key2[coordinates.get(1)][coordinates.get(0) + 1] != 0) {
-                            coordinates.set(0, coordinates.get(0) + 1);
-                        }
-                    }
+    public String part2(){
+        int x = 0;
+        int y = 2;
+        StringBuilder result = new StringBuilder();
+        for (String s : input) {
+            for (char c : s.toCharArray()) {
+                switch (c) {
+                    case 'U' -> y = (y > 0 && key2[y - 1][x] != 0) ? y - 1 : y;
+                    case 'D' -> y = (y < 4 && key2[y + 1][x] != 0) ? y + 1 : y;
+                    case 'L' -> x = (x > 0 && key2[y][x - 1] != 0) ? x - 1 : x;
+                    case 'R' -> x = (x < 4 && key2[y][x + 1] != 0) ? x + 1 : x;
                 }
             }
-            if(key2[coordinates.get(1)][coordinates.get(0)] == 10){
-                result.updateAndGet(v -> v + "A");
-            } else if(key2[coordinates.get(1)][coordinates.get(0)] == 11){
-                result.updateAndGet(v -> v + "B");
-            } else if(key2[coordinates.get(1)][coordinates.get(0)] == 12){
-                result.updateAndGet(v -> v + "C");
-            } else if(key2[coordinates.get(1)][coordinates.get(0)] == 13){
-                result.updateAndGet(v -> v + "D");
-            } else{
-                result.updateAndGet(v -> v + key2[coordinates.get(1)][coordinates.get(0)]);
-            }
-        });
-        return result.get();
+            int code = key2[y][x];
+            if (code == 10) result.append('A');
+            else if (code == 11) result.append('B');
+            else if (code == 12) result.append('C');
+            else if (code == 13) result.append('D');
+            else result.append(code);
+        }
+        return result.toString();
+
     }
+
 
     public static void main(String[] args) {
         Day02 day02 = new Day02("input.txt");
