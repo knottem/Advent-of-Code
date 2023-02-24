@@ -48,7 +48,7 @@ class Day05(text : String = "input.txt") {
             val amount = parts[1].toInt()
             val from = parts[3].toInt() - 1
             val to = parts[5].toInt() - 1
-            
+
             for(i in 0 until amount){
                 piles[to].add(piles[from].removeAt(piles[from].lastIndex))
             }
