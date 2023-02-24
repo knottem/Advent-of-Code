@@ -7,14 +7,18 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Day01 {
-    
-    private final List<String> input;
 
-    public Day01(String text) throws IOException {
+    private List<String> input;
+
+    public Day01(String text) {
         String day = "01";
         String year = "2015";
-        String filePath = "src/resources/" + year + "/" + day + "/" + text;
-        input = Files.readAllLines(Paths.get(filePath));
+        try {
+            String filePath = "src/resources/" + year + "/" + day + "/" + text;
+            input = Files.readAllLines(Paths.get(filePath));
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
     }
     public int part1() {
         return (int) input.stream()
