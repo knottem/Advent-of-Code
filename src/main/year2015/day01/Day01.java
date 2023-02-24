@@ -49,10 +49,4 @@ public class Day01 {
         return charNumber + 1;
     }
 
-    public static void main(String[] args) {
-        Day01 day01 = new Day01("input.txt");
-        System.out.println(day01.input);
-        System.out.println("Part 1: " + day01.part1());
-        System.out.println("Part 2: " + day01.part2());
-    }
 }

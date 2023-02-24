@@ -15,7 +15,6 @@ public class AocTests2015 {
         assertEquals(aocDay01.part2(), 5);
     }
 
-
     @Test
     final void day02Tests(){
         Day02 aocDay02 = new Day02("test.txt");
