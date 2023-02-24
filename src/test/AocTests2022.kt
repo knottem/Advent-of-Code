@@ -1,3 +1,4 @@
+import main.year2022.day05.Day05
 import year2022.day01.Day01
 import year2022.day02.Day02
 import year2022.day03.Day03
@@ -38,6 +39,14 @@ class AocTests2022 {
         val aocDay04 = Day04("test.txt")
         Assert.assertEquals(aocDay04.part1(), 2)
         Assert.assertEquals(aocDay04.part2(), 4)
+    }
+
+    @Test
+    fun day05Tests(){
+        // test file
+        val aocDay05 = Day05("test.txt")
+        Assert.assertEquals(aocDay05.part1(), "CMZ")
+        Assert.assertEquals(aocDay05.part2(), "MCD")
     }
 
     @Test
