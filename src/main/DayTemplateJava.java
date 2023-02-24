@@ -7,7 +7,7 @@ public class DayTemplateJava {
 
     private List<String> input;
 
-    public DayTemplateJava(String text) throws IOException {
+    public DayTemplateJava(String text) {
         String day = ""; //day
         String year = ""; //year
         try{
