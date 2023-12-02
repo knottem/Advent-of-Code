@@ -90,37 +90,25 @@ public class Day02 {
         return true;
     }
 
+    // Part 2
     public int part2() {
         int validSum = 0;
         for(String line : input) {
+            int red, green, blue;
+            red = green = blue = 0;
             line = line.substring(line.indexOf(':') + 1).trim();
             String[] sets = line.split(";");
-            List<Cube> cubes = new ArrayList<>();
             for (String set : sets) {
                 String[] cubeInfo = set.split(",");
                 for (String info : cubeInfo) {
-                    info = info.trim();
-                    String[] parts = info.split(" ");
+                    String[] parts = info.trim().split(" ");
                     int number = Integer.parseInt(parts[0]);
-                    boolean exists = false;
-                    for (Cube cube : cubes) {
-                        if(cube.getColor().equals(parts[1])) {
-                            exists = true;
-                            if(cube.getNumber() < number) {
-                                cube.number = number;
-                            }
-                        }
-                    }
-                    if(!exists) {
-                        cubes.add(new Cube(parts[1], Integer.parseInt(parts[0])));
-                    }
+                    if(parts[1].equals("red") && number > red) red = number;
+                    if(parts[1].equals("green") && number > green) green = number;
+                    if(parts[1].equals("blue") && number > blue) blue = number;
                 }
             }
-            int sum = 1;
-            for(Cube cube : cubes) {
-                sum *= cube.getNumber();
-            }
-            validSum += sum;
+            validSum += red * green * blue;
         }
         return validSum;
     }
