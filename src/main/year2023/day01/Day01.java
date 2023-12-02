@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 
 public class Day01 {
 
-
-
     private List<String> input;
 
     public Day01(String text) {
@@ -77,13 +75,5 @@ public class Day01 {
             sum += Integer.parseInt(extractFirst(line) + extractLast(line));
         }
         return sum;
-    }
-
-    public static void main(String[] args) {
-        Day01 day01a = new Day01("input.txt");
-        System.out.println("Day 1 Part 1 : " + day01a.part1());
-
-        Day01 day01b = new Day01("input.txt");
-        System.out.println("Day 1 Part 2 : " + day01b.part2());
     }
 }
