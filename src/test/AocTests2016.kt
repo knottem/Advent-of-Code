@@ -1,7 +1,7 @@
-import main.year2016.day01.Day01
+import main.year2016.Day01
 import org.testng.Assert.*
 import org.testng.annotations.Test
-import year2016.day02.Day02
+import year2016.Day02
 
 
 class AocTests2016 {

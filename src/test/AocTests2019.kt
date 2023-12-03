@@ -1,9 +1,9 @@
-import main.year2019.day01.Day01
-import main.year2019.day02.Day02
-import main.year2019.day03.Day03
+import main.year2019.Day01
+import main.year2019.Day02
+import main.year2019.Day03
 import org.testng.Assert.*
 import org.testng.annotations.Test
-import year2019.day04.Day04
+import main.year2019.Day04
 
 class AocTests2019 {
 

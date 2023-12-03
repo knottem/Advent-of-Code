@@ -1,5 +1,5 @@
-import main.year2020.day01.Day01
-import main.year2020.day04.Day04
+import main.year2020.Day01
+import main.year2020.Day04
 import org.testng.Assert
 import org.testng.annotations.Test
 

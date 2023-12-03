@@ -1,12 +1,12 @@
-import main.year2022.day05.Day05
-import year2022.day01.Day01
-import year2022.day02.Day02
-import year2022.day03.Day03
-import year2022.day04.Day04
-import year2022.day10.Day10
+import main.year2022.Day05
+import main.year2022.Day01
+import main.year2022.Day02
+import main.year2022.Day03
+import main.year2022.Day04
+import main.year2022.Day10
 import org.testng.Assert.*
 import org.testng.annotations.Test
-import year2022.day06.Day06
+import year2022.Day06
 
 class AocTests2022 {
 

@@ -1,8 +1,8 @@
 import org.testng.annotations.Test;
-import year2015.day01.Day01;
-import year2015.day02.Day02;
-import year2015.day03.Day03;
-import year2015.day05.Day05;
+import year2015.Day01;
+import year2015.Day02;
+import year2015.Day03;
+import year2015.Day05;
 
 import static org.testng.Assert.assertEquals;
 
