@@ -1,24 +1,16 @@
 package year2023;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import template.Day;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day02 {
+public class Day02 extends Day {
 
-    private List<String> input;
+    private final List<String> input = getInputFile();
 
-    public Day02(String text) {
-        String day = "02"; //day
-        String year = "2023"; //year
-        try{
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Day02() {
+       super("input.txt", "02", "2023");
     }
 
     private class Cube {

@@ -2,7 +2,7 @@ package main.template
 
 import java.io.File
 
-abstract class Day(text : String = "input.txt") {
+abstract class DayKotlin(text : String = "input.txt") {
 
     private val day = "" //01
     private val year = "" //2022

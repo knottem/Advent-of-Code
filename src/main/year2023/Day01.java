@@ -1,25 +1,16 @@
 package year2023;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import template.Day;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Day01 {
+public class Day01 extends Day {
 
-    private List<String> input;
+    private final List<String> input = getInputFile();
 
-    public Day01(String text) {
-        String day = "01"; //day
-        String year = "2023"; //year
-        try{
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Day01() {
+      super("input.txt", "01", "2023");
     }
 
     // Part 1 - Find the first and last digit on each line and add them together to a 2-digit number.
@@ -40,15 +31,6 @@ public class Day01 {
         }
         return sum;
     }
-
-    // Method to get first digit and last digit from a string that can contain both digits and letters (e.g. "one" or "two")
-    // Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
-    //
-    //Equipped with this new information, you now need to find the real first and last digit on each line. For example:
-    // 1234 -> 14
-    // 236twoknbxlczgd -> 22
-    // s2eight6bhshvmsevensix -> 26
-    // three1sk4hnine -> 39
     static String regex = "(one|two|three|four|five|six|seven|eight|nine|[1-9])";
     static List<String> digits = List.of(
             "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"

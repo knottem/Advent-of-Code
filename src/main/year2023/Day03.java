@@ -1,6 +1,8 @@
 package year2023;
 
 import template.Day;
+
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +12,7 @@ public class Day03 extends Day {
     private final List<String> input = getInputFile();
 
     public Day03() {
-        super("input.txt", "03", "2023");
+        super("input", "03", "2023");
     }
 
     static class Position {
@@ -77,22 +79,24 @@ public class Day03 extends Day {
 
     private int calculateGearRatios(List<Position> positions) {
         int sum = 0;
+
         for (Position pos : positions) {
             if (pos.isChecked()) {
                 continue;
             }
             pos.setChecked(true);
-            int[] gearPositions = getGearPosition(pos.lineIndex, pos.charIndex, pos.length);
-            if (gearPositions == null) {
-                continue;
-            }
-            for (Position pos2 : positions) {
-                if (checkIfNumberTouchesGear(pos2, gearPositions) && !pos2.isChecked()) {
-                    sum += pos.number * pos2.number;
-                    pos2.setChecked(true);
+
+            int[] gearPosition = getGearPosition(pos.lineIndex, pos.charIndex, pos.length);
+            if (gearPosition != null) {
+                for (Position otherPosition : positions) {
+                    if (!otherPosition.isChecked() && isNearby(gearPosition, otherPosition)) {
+                        sum += (pos.number * otherPosition.number);
+                        otherPosition.setChecked(true);
+                    }
                 }
             }
         }
+
         return sum;
     }
 
@@ -100,7 +104,8 @@ public class Day03 extends Day {
         for (int i = lineIndex - 1; i <= lineIndex + 1; i++) {
             for (int j = charIndex - 1; j <= charIndex + numberLength; j++) {
                 if (i >= 0 && i < input.size() && j >= 0 && j < input.get(i).length()) {
-                    if (input.get(i).charAt(j) == '*') {
+                    char nearbyChar = input.get(i).charAt(j);
+                    if (nearbyChar == '*') {
                         return new int[]{i, j};
                     }
                 }
@@ -109,9 +114,15 @@ public class Day03 extends Day {
         return null;
     }
 
-    private boolean checkIfNumberTouchesGear(Position position, int[] gearPosition) {
-        return Math.abs(position.lineIndex - gearPosition[0]) <= 1 &&
-                Math.abs(position.charIndex - gearPosition[1]) <= position.length + 1;
+
+    private boolean isNearby(int[] gearPosition, Position otherPosition) {
+        int gearLineIndex = gearPosition[0];
+        int gearCharIndex = gearPosition[1];
+        int lineIndex = otherPosition.lineIndex;
+        int charIndex = otherPosition.charIndex;
+
+        return Math.abs(gearLineIndex - lineIndex) <= 1 &&
+                Math.abs(gearCharIndex - charIndex) <= otherPosition.length + 1;
     }
     @Override
     public int part2() {
