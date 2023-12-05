@@ -16,7 +16,7 @@ public class Day01 extends Day {
     // Part 1 - Find the first and last digit on each line and add them together to a 2-digit number.
     // If there is only one digit, add it to itself to create a 2-digit number.
     @Override
-    public int part1() {
+    public long part1() {
         int sum = 0;
         for (String s : input) {
             int bigNumber = Integer.parseInt(s.replaceAll("[^0-9-]", ""));
@@ -53,7 +53,7 @@ public class Day01 extends Day {
     }
 
     @Override
-    public int part2() {
+    public long part2() {
         int sum = 0;
         for (String line : input) {
             sum += Integer.parseInt(extractFirst(line) + extractLast(line));

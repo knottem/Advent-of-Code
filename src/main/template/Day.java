@@ -39,9 +39,9 @@ public abstract class Day {
         return input;
     }
 
-    public abstract int part1();
+    public abstract long part1();
 
-    public abstract int part2();
+    public abstract long part2();
 
 
 }

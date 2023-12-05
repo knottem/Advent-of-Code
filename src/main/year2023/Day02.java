@@ -40,7 +40,7 @@ public class Day02 extends Day {
     // Each game is listed with its ID number (like the 11 in Game 11: ...) followed by a
     // semicolon-separated list of subsets of cubes that were revealed from the bag
     // (like 3 red, 5 green, 4 blue).
-    public int part1() {
+    public long part1() {
         int validSum = 0;
         int gameNumber = 0;
         for(String line : input) {
@@ -83,7 +83,7 @@ public class Day02 extends Day {
     }
 
     // Part 2
-    public int part2() {
+    public long part2() {
         int validSum = 0;
         for(String line : input) {
             int red, green, blue;

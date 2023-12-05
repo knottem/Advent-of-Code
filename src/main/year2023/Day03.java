@@ -12,7 +12,7 @@ public class Day03 extends Day {
     private final List<String> input = getInputFile();
 
     public Day03() {
-        super("input", "03", "2023");
+        super("input.txt", "03", "2023");
     }
 
     static class Position {
@@ -50,7 +50,7 @@ public class Day03 extends Day {
         return positions;
     }
     @Override
-    public int part1() {
+    public long part1() {
         List<Position> positions = getPositionsOfNumbers();
         int sum = 0;
         for (Position position : positions) {
@@ -125,7 +125,7 @@ public class Day03 extends Day {
                 Math.abs(gearCharIndex - charIndex) <= otherPosition.length + 1;
     }
     @Override
-    public int part2() {
+    public long part2() {
         return calculateGearRatios(getPositionsOfNumbers());
     }
 }

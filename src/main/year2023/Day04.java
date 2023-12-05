@@ -17,7 +17,7 @@ public class Day04 extends Day {
 
 
     @Override
-    public int part1() {
+    public long part1() {
         int totalPoints = 0;
         for (String s : input){
             String[] parts = s.split(Pattern.quote("|"));
@@ -54,20 +54,20 @@ public class Day04 extends Day {
     }
 
     @Override
-    public int part2() {
+    public long part2() {
         int totalScratchBoards = 0;
-        int[] extra = new int[input.size() + 10];
+        int[] extra = new int[input.size()];
         for (int i = 0; i < input.size(); i++) {
             String[] parts = input.get(i).split(Pattern.quote("|"));
-            List<Integer> winningNumbers = extractNumbers(parts[0].substring(8));
-            List<Integer> drawnNumbers = extractNumbers(parts[1]);
-            int scratchCards = calculateScratchboards(winningNumbers,drawnNumbers);
-            for (int j = -1; j < extra[i]; j++) {
+            int scratchCards = calculateScratchboards(
+                    extractNumbers(parts[0].substring(8)),
+                    extractNumbers(parts[1]));
+            for (int j = 0; j < extra[i] + 1; j++) {
                 for (int k = 0; k < scratchCards; k++) {
                     extra[i+k+1]++;
                 }
-                totalScratchBoards++;
             }
+            totalScratchBoards += extra[i] + 1;
         }
         return totalScratchBoards;
     }
