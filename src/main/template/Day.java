@@ -7,19 +7,23 @@ import java.util.List;
 
 public abstract class Day {
 
-    String day;
-    String year;
-
-    private List<String> input;
+    private final String day;
+    private final String year;
+    private final List<String> input;
 
     public Day(String text, String day, String year) {
         this.day = day;
         this.year = year;
-        try{
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readAllLines(Paths.get(filePath));
+        this.input = readInputFile(text);
+    }
+
+    private List<String> readInputFile(String text) {
+        try {
+            return Files.readAllLines(
+                    Paths.get("src/resources/" + year + "/" + day + "/" + text));
         } catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -35,11 +39,9 @@ public abstract class Day {
         return input;
     }
 
-    public int part1() {
-        return 0;
-    }
+    public abstract int part1();
 
-    public int part2() {
-        return 0;
-    }
+    public abstract int part2();
+
+
 }

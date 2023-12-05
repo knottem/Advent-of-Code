@@ -15,6 +15,7 @@ public class Day01 extends Day {
 
     // Part 1 - Find the first and last digit on each line and add them together to a 2-digit number.
     // If there is only one digit, add it to itself to create a 2-digit number.
+    @Override
     public int part1() {
         int sum = 0;
         for (String s : input) {
@@ -51,6 +52,7 @@ public class Day01 extends Day {
         return (i >= 0) ? String.valueOf(i + 1) : s;
     }
 
+    @Override
     public int part2() {
         int sum = 0;
         for (String line : input) {

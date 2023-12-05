@@ -1,15 +1,11 @@
 package year2023;
 
 import template.Day;
-
-import java.time.chrono.IsoChronology;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 public class Day04 extends Day {
 
@@ -34,13 +30,10 @@ public class Day04 extends Day {
 
     private List<Integer> extractNumbers(String input) {
         List<Integer> numbers = new ArrayList<>();
-        Pattern pattern = Pattern.compile("\\d+");
-        Matcher matcher = pattern.matcher(input);
-
+        Matcher matcher = Pattern.compile("\\d+").matcher(input);
         while (matcher.find()) {
             numbers.add(Integer.parseInt(matcher.group()));
         }
-
         return numbers;
     }
 
@@ -62,20 +55,23 @@ public class Day04 extends Day {
 
     @Override
     public int part2() {
+        long start = System.nanoTime();
         int totalScratchBoards = 0;
         int[] extra = new int[input.size() + 10];
         for (int i = 0; i < input.size(); i++) {
+            String[] parts = input.get(i).split(Pattern.quote("|"));
+            List<Integer> winningNumbers = extractNumbers(parts[0].substring(8));
+            List<Integer> drawnNumbers = extractNumbers(parts[1]);
+            int scratchCards = calculateScratchboards(winningNumbers,drawnNumbers);
             for (int j = -1; j < extra[i]; j++) {
-                String[] parts = input.get(i).split(Pattern.quote("|"));
-                List<Integer> winningNumbers = extractNumbers(parts[0].substring(8));
-                List<Integer> drawnNumbers = extractNumbers(parts[1]);
-                int scratchCards = calculateScratchboards(winningNumbers, drawnNumbers);
                 for (int k = 0; k < scratchCards; k++) {
                     extra[i+k+1]++;
                 }
                 totalScratchBoards++;
             }
         }
+        long end = System.nanoTime();
+        System.out.println((double) (end - start) / 1_000_000_000);
         return totalScratchBoards;
     }
 
