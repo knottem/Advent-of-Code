@@ -55,7 +55,6 @@ public class Day04 extends Day {
 
     @Override
     public int part2() {
-        long start = System.nanoTime();
         int totalScratchBoards = 0;
         int[] extra = new int[input.size() + 10];
         for (int i = 0; i < input.size(); i++) {
@@ -70,8 +69,6 @@ public class Day04 extends Day {
                 totalScratchBoards++;
             }
         }
-        long end = System.nanoTime();
-        System.out.println((double) (end - start) / 1_000_000_000);
         return totalScratchBoards;
     }
 
