@@ -1,5 +1,3 @@
-package main;
-
 import template.Day;
 import year2023.*;
 
@@ -15,7 +13,8 @@ public class Main {
         //days.add(new Day02());
         //days.add(new Day03());
         //days.add(new Day04());
-        days.add(new Day05());
+        //days.add(new Day05());
+        days.add(new Day06());
 
 
         for (Day day : days) {
