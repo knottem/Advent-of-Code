@@ -9,18 +9,20 @@ public abstract class Day {
 
     private final String day;
     private final String year;
+    private final String fileName;
     private final List<String> input;
 
-    public Day(String text, String day, String year) {
+    public Day(String fileName, String day, String year) {
         this.day = day;
         this.year = year;
-        this.input = readInputFile(text);
+        this.fileName = fileName;
+        this.input = readInputFile();
     }
 
-    private List<String> readInputFile(String text) {
+    private List<String> readInputFile() {
         try {
             return Files.readAllLines(
-                    Paths.get("src/resources/" + year + "/" + day + "/" + text));
+                    Paths.get("src/resources/" + year + "/" + day + "/" + fileName));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -33,6 +35,10 @@ public abstract class Day {
 
     public String getYear() {
         return year;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 
     public List<String> getInputFile() {

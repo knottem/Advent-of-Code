@@ -19,10 +19,10 @@ public class Main {
 
         for (Day day : days) {
             System.out.printf("""
-                    Day %s, Year %s
+                    Day %s, Year %s, File: %s
                     Part 1: %s
                     Part 2: %s
-                    %n""", day.getDay(), day.getYear(), day.part1(), day.part2());
+                    %n""", day.getDay(), day.getYear(), day.getFileName(), day.part1(), day.part2());
         }
     }
 }
