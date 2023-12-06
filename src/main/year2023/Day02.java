@@ -41,7 +41,7 @@ public class Day02 extends Day {
     public long part1() {
         int validSum = 0;
         int gameNumber = 0;
-        for(String line : getInputFile()) {
+        for(String line : getInput()) {
             gameNumber++;
             line = line.substring(line.indexOf(':') + 1).trim();
             String[] sets = line.split(";");
@@ -83,7 +83,7 @@ public class Day02 extends Day {
     // Part 2
     public long part2() {
         int validSum = 0;
-        for(String line : getInputFile()) {
+        for(String line : getInput()) {
             int red, green, blue;
             red = green = blue = 0;
             line = line.substring(line.indexOf(':') + 1).trim();

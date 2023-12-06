@@ -15,13 +15,14 @@ public class Day06 extends Day {
     // For each whole millisecond you spend at the beginning of the race holding down the button,
     // the boat's speed increases by one millimeter per millisecond.
     // It starts at 0 speed so if we hold it for the entire time we get 0 distance.
-    @Override //Version 2
+    // Version 2
+    @Override
     public long part1() {
-        long[] time = Arrays.stream(getInputFile().get(0).split("\\s+"))
+        long[] time = Arrays.stream(getInput().get(0).split("\\s+"))
                 .skip(1)
                 .mapToLong(Long::parseLong)
                 .toArray();
-        long[] distance = Arrays.stream(getInputFile().get(1).split("\\s+"))
+        long[] distance = Arrays.stream(getInput().get(1).split("\\s+"))
                 .skip(1)
                 .mapToLong(Long::parseLong)
                 .toArray();
@@ -33,13 +34,14 @@ public class Day06 extends Day {
         return totalNumbersOfWay;
     }
 
-    //Part 2
-    //There's really only one race - ignore the spaces between the numbers on each line.
-    @Override //Version 2
+    // Part 2
+    // There's really only one race - ignore the spaces between the numbers on each line.
+    // Version 2
+    @Override
     public long part2() {
         return calculateDistanceCount(
-                Long.parseLong(getInputFile().get(0).substring(5).replaceAll("\\s+", "")),
-                Long.parseLong(getInputFile().get(1).substring(9).replaceAll("\\s+", "")));
+                Long.parseLong(getInput().get(0).substring(5).replaceAll("\\s+", "")),
+                Long.parseLong(getInput().get(1).substring(9).replaceAll("\\s+", "")));
     }
 
     private long calculateDistanceCount(long t, long d) {

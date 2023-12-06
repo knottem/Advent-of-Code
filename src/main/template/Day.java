@@ -41,7 +41,7 @@ public abstract class Day {
         return fileName;
     }
 
-    public List<String> getInputFile() {
+    public List<String> getInput() {
         return input;
     }
 

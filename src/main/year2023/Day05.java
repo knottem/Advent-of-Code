@@ -13,7 +13,6 @@ public class Day05 extends Day {
 
     @Override
     public long part1() {
-        long start = System.nanoTime();
         List<Long> seeds = new ArrayList<>();
         Map<String, List<Long>> mapData = new HashMap<>();
         mapData.put("seed-to-soil", new ArrayList<>());
@@ -24,7 +23,7 @@ public class Day05 extends Day {
         mapData.put("temperature-to-humidity", new ArrayList<>());
         mapData.put("humidity-to-location", new ArrayList<>());
         String currentMapType = "";
-        for (String line : getInputFile()) {
+        for (String line : getInput()) {
             if (line.startsWith("seeds:")) {
                 String[] seedValues = line.substring(7).trim().split(" ");
                 seeds.addAll(Arrays.stream(seedValues).map(Long::parseLong).toList());
@@ -43,8 +42,6 @@ public class Day05 extends Day {
                 "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location")){
             seeds = updateList(seeds, mapData.get(mapType));
         }
-        long end = System.nanoTime();
-        System.out.println("Part 1 Time: " + ((double) (end - start) / 1_000_000_000));
         return Collections.min(seeds);
     }
 
@@ -69,7 +66,6 @@ public class Day05 extends Day {
 
     @Override
     public long part2() {
-        long start = System.nanoTime();
         List<Long> seeds = new ArrayList<>();
         Map<String, List<Long>> mapData = new HashMap<>();
         mapData.put("seed-to-soil", new ArrayList<>());
@@ -80,7 +76,7 @@ public class Day05 extends Day {
         mapData.put("temperature-to-humidity", new ArrayList<>());
         mapData.put("humidity-to-location", new ArrayList<>());
         String currentMapType = "";
-        for (String line : getInputFile()) {
+        for (String line : getInput()) {
             if (line.startsWith("seeds:")) {
                 String[] seedValues = line.substring(7).trim().split(" ");
                 seeds.addAll(Arrays.stream(seedValues).map(Long::parseLong).toList());
@@ -96,8 +92,6 @@ public class Day05 extends Day {
             }
         }
         seeds = updateSeeds(seeds, mapData);
-        long end = System.nanoTime();
-        System.out.println("Part 2 Time: " + ((double) (end - start) / 1_000_000_000));
         return seeds.get(0);
     }
 

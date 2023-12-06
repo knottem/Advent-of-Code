@@ -18,11 +18,15 @@ public class Main {
 
 
         for (Day day : days) {
-            System.out.printf("""
-                    Day %s, Year %s, File: %s
-                    Part 1: %s
-                    Part 2: %s
-                    %n""", day.getDay(), day.getYear(), day.getFileName(), day.part1(), day.part2());
+            System.out.printf("Day %s, Year %s, File: %s%n", day.getDay(), day.getYear(), day.getFileName());
+            double start = System.nanoTime();
+            long part1Result = day.part1();
+            double end = System.nanoTime();
+            System.out.printf("Part 1: %d%nTime: %s s%n", part1Result, String.format("%.6f", (end - start) / 1_000_000_000));
+            start = System.nanoTime();
+            long part2Result = day.part2();
+            end = System.nanoTime();
+            System.out.printf("Part 2: %d%nTime: %s s%n%n", part2Result, String.format("%.6f", (end - start) / 1_000_000_000));
         }
     }
 }

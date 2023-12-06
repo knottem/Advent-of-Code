@@ -16,7 +16,7 @@ public class Day01 extends Day {
     @Override
     public long part1() {
         int sum = 0;
-        for (String s : getInputFile()) {
+        for (String s : getInput()) {
             int bigNumber = Integer.parseInt(s.replaceAll("[^0-9-]", ""));
             if(bigNumber < 10) {
                 sum += (bigNumber * 10) + bigNumber;
@@ -53,7 +53,7 @@ public class Day01 extends Day {
     @Override
     public long part2() {
         int sum = 0;
-        for (String line : getInputFile()) {
+        for (String line : getInput()) {
             sum += Integer.parseInt(extractFirst(line) + extractLast(line));
         }
         return sum;

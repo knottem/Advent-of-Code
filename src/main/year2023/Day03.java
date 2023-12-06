@@ -2,7 +2,6 @@ package year2023;
 
 import template.Day;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,8 +37,8 @@ public class Day03 extends Day {
 
     private List<Position> getPositionsOfNumbers() {
         List<Position> positions = new ArrayList<>();
-        for (int i = 0; i < getInputFile().size(); i++) {
-            Matcher matcher = Pattern.compile("[0-9]+").matcher(getInputFile().get(i));
+        for (int i = 0; i < getInput().size(); i++) {
+            Matcher matcher = Pattern.compile("[0-9]+").matcher(getInput().get(i));
             while (matcher.find()) {
                 String match = matcher.group();
                 positions.add(new Position(i, matcher.start(), Integer.parseInt(match), match.length()));
@@ -64,8 +63,8 @@ public class Day03 extends Day {
         int charIndex = position.charIndex;
         for (int i = lineIndex - 1; i <= lineIndex + 1; i++) {
             for (int j = charIndex - 1; j <= charIndex + position.length; j++) {
-                if (i >= 0 && i < getInputFile().size() && j >= 0 && j < getInputFile().get(i).length()) {
-                    char nearbyChar = getInputFile().get(i).charAt(j);
+                if (i >= 0 && i < getInput().size() && j >= 0 && j < getInput().get(i).length()) {
+                    char nearbyChar = getInput().get(i).charAt(j);
                     if (!Character.isDigit(nearbyChar) && nearbyChar != '.') {
                         return true;
                     }
@@ -101,8 +100,8 @@ public class Day03 extends Day {
     private int[] getGearPosition(int lineIndex, int charIndex, int numberLength) {
         for (int i = lineIndex - 1; i <= lineIndex + 1; i++) {
             for (int j = charIndex - 1; j <= charIndex + numberLength; j++) {
-                if (i >= 0 && i < getInputFile().size() && j >= 0 && j < getInputFile().get(i).length()) {
-                    char nearbyChar = getInputFile().get(i).charAt(j);
+                if (i >= 0 && i < getInput().size() && j >= 0 && j < getInput().get(i).length()) {
+                    char nearbyChar = getInput().get(i).charAt(j);
                     if (nearbyChar == '*') {
                         return new int[]{i, j};
                     }
