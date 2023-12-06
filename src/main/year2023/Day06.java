@@ -3,11 +3,8 @@ package year2023;
 import template.Day;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Day06 extends Day {
-
-    List<String> input = getInputFile();
 
     public Day06() {
         super("input.txt", "06", "2023");
@@ -20,18 +17,18 @@ public class Day06 extends Day {
     // It starts at 0 speed so if we hold it for the entire time we get 0 distance.
     @Override //Version 2
     public long part1() {
-        long[] time = Arrays.stream(input.get(0).split("\\s+"))
+        long[] time = Arrays.stream(getInputFile().get(0).split("\\s+"))
                 .skip(1)
                 .mapToLong(Long::parseLong)
                 .toArray();
-        long[] distance = Arrays.stream(input.get(1).split("\\s+"))
+        long[] distance = Arrays.stream(getInputFile().get(1).split("\\s+"))
                 .skip(1)
                 .mapToLong(Long::parseLong)
                 .toArray();
 
         long totalNumbersOfWay = 1;
         for (int i = 0; i < time.length; i++) {
-            totalNumbersOfWay *= countDistanceBeats(time[i], distance[i]);
+            totalNumbersOfWay *= calculateDistanceCount(time[i], distance[i]);
         }
         return totalNumbersOfWay;
     }
@@ -40,12 +37,12 @@ public class Day06 extends Day {
     //There's really only one race - ignore the spaces between the numbers on each line.
     @Override //Version 2
     public long part2() {
-        return countDistanceBeats(
-                Long.parseLong(input.get(0).substring(5).replaceAll("\\s+", "")),
-                Long.parseLong(input.get(1).substring(9).replaceAll("\\s+", "")));
+        return calculateDistanceCount(
+                Long.parseLong(getInputFile().get(0).substring(5).replaceAll("\\s+", "")),
+                Long.parseLong(getInputFile().get(1).substring(9).replaceAll("\\s+", "")));
     }
 
-    private long countDistanceBeats(long t, long d) {
+    private long calculateDistanceCount(long t, long d) {
         double temp = Math.sqrt((double) t * t - 4 * d);
         int right = (int) Math.ceil((temp + t) / 2) - 1;
         int left = (int) ((t - temp) / 2) + 1;

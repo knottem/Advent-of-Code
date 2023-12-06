@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 
 public class Day04 extends Day {
 
-    List<String> input = getInputFile();
-
     public Day04() {
         super("input.txt", "04", "2023");
     }
@@ -19,7 +17,7 @@ public class Day04 extends Day {
     @Override
     public long part1() {
         int totalPoints = 0;
-        for (String s : input){
+        for (String s : getInputFile()){
             String[] parts = s.split(Pattern.quote("|"));
             totalPoints += calculatePoints(
                     extractNumbers(parts[0].substring(8))
@@ -56,9 +54,9 @@ public class Day04 extends Day {
     @Override
     public long part2() {
         int totalScratchBoards = 0;
-        int[] extra = new int[input.size()];
-        for (int i = 0; i < input.size(); i++) {
-            String[] parts = input.get(i).split(Pattern.quote("|"));
+        int[] extra = new int[getInputFile().size()];
+        for (int i = 0; i < getInputFile().size(); i++) {
+            String[] parts = getInputFile().get(i).split(Pattern.quote("|"));
             int scratchCards = calculateScratchboards(
                     extractNumbers(parts[0].substring(8)),
                     extractNumbers(parts[1]));

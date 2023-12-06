@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 
 public class Day03 extends Day {
 
-    private final List<String> input = getInputFile();
-
     public Day03() {
         super("input.txt", "03", "2023");
     }
@@ -40,8 +38,8 @@ public class Day03 extends Day {
 
     private List<Position> getPositionsOfNumbers() {
         List<Position> positions = new ArrayList<>();
-        for (int i = 0; i < input.size(); i++) {
-            Matcher matcher = Pattern.compile("[0-9]+").matcher(input.get(i));
+        for (int i = 0; i < getInputFile().size(); i++) {
+            Matcher matcher = Pattern.compile("[0-9]+").matcher(getInputFile().get(i));
             while (matcher.find()) {
                 String match = matcher.group();
                 positions.add(new Position(i, matcher.start(), Integer.parseInt(match), match.length()));
@@ -66,8 +64,8 @@ public class Day03 extends Day {
         int charIndex = position.charIndex;
         for (int i = lineIndex - 1; i <= lineIndex + 1; i++) {
             for (int j = charIndex - 1; j <= charIndex + position.length; j++) {
-                if (i >= 0 && i < input.size() && j >= 0 && j < input.get(i).length()) {
-                    char nearbyChar = input.get(i).charAt(j);
+                if (i >= 0 && i < getInputFile().size() && j >= 0 && j < getInputFile().get(i).length()) {
+                    char nearbyChar = getInputFile().get(i).charAt(j);
                     if (!Character.isDigit(nearbyChar) && nearbyChar != '.') {
                         return true;
                     }
@@ -103,8 +101,8 @@ public class Day03 extends Day {
     private int[] getGearPosition(int lineIndex, int charIndex, int numberLength) {
         for (int i = lineIndex - 1; i <= lineIndex + 1; i++) {
             for (int j = charIndex - 1; j <= charIndex + numberLength; j++) {
-                if (i >= 0 && i < input.size() && j >= 0 && j < input.get(i).length()) {
-                    char nearbyChar = input.get(i).charAt(j);
+                if (i >= 0 && i < getInputFile().size() && j >= 0 && j < getInputFile().get(i).length()) {
+                    char nearbyChar = getInputFile().get(i).charAt(j);
                     if (nearbyChar == '*') {
                         return new int[]{i, j};
                     }

@@ -43,5 +43,4 @@ public abstract class Day {
 
     public abstract long part2();
 
-
 }

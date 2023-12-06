@@ -7,8 +7,6 @@ import java.util.List;
 
 public class Day02 extends Day {
 
-    private final List<String> input = getInputFile();
-
     public Day02() {
        super("input.txt", "02", "2023");
     }
@@ -43,7 +41,7 @@ public class Day02 extends Day {
     public long part1() {
         int validSum = 0;
         int gameNumber = 0;
-        for(String line : input) {
+        for(String line : getInputFile()) {
             gameNumber++;
             line = line.substring(line.indexOf(':') + 1).trim();
             String[] sets = line.split(";");
@@ -85,7 +83,7 @@ public class Day02 extends Day {
     // Part 2
     public long part2() {
         int validSum = 0;
-        for(String line : input) {
+        for(String line : getInputFile()) {
             int red, green, blue;
             red = green = blue = 0;
             line = line.substring(line.indexOf(':') + 1).trim();

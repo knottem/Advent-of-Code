@@ -6,10 +6,8 @@ import java.util.*;
 
 public class Day05 extends Day {
 
-    List<String> input = getInputFile();
-
     public Day05() {
-        super("example.txt", "05", "2023");
+        super("input.txt", "05", "2023");
     }
 
 
@@ -26,7 +24,7 @@ public class Day05 extends Day {
         mapData.put("temperature-to-humidity", new ArrayList<>());
         mapData.put("humidity-to-location", new ArrayList<>());
         String currentMapType = "";
-        for (String line : input) {
+        for (String line : getInputFile()) {
             if (line.startsWith("seeds:")) {
                 String[] seedValues = line.substring(7).trim().split(" ");
                 seeds.addAll(Arrays.stream(seedValues).map(Long::parseLong).toList());
@@ -82,7 +80,7 @@ public class Day05 extends Day {
         mapData.put("temperature-to-humidity", new ArrayList<>());
         mapData.put("humidity-to-location", new ArrayList<>());
         String currentMapType = "";
-        for (String line : input) {
+        for (String line : getInputFile()) {
             if (line.startsWith("seeds:")) {
                 String[] seedValues = line.substring(7).trim().split(" ");
                 seeds.addAll(Arrays.stream(seedValues).map(Long::parseLong).toList());

@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
 
 public class Day01 extends Day {
 
-    private final List<String> input = getInputFile();
-
     public Day01() {
       super("input.txt", "01", "2023");
     }
@@ -18,7 +16,7 @@ public class Day01 extends Day {
     @Override
     public long part1() {
         int sum = 0;
-        for (String s : input) {
+        for (String s : getInputFile()) {
             int bigNumber = Integer.parseInt(s.replaceAll("[^0-9-]", ""));
             if(bigNumber < 10) {
                 sum += (bigNumber * 10) + bigNumber;
@@ -55,7 +53,7 @@ public class Day01 extends Day {
     @Override
     public long part2() {
         int sum = 0;
-        for (String line : input) {
+        for (String line : getInputFile()) {
             sum += Integer.parseInt(extractFirst(line) + extractLast(line));
         }
         return sum;
