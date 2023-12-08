@@ -18,6 +18,7 @@ public class Day06 extends Day {
     // Version 2
     @Override
     public long part1() {
+
         long[] time = Arrays.stream(getInput().get(0).split("\\s+"))
                 .skip(1)
                 .mapToLong(Long::parseLong)
@@ -35,7 +36,7 @@ public class Day06 extends Day {
     }
 
     // Part 2
-    // There's really only one race - ignore the spaces between the numbers on each line.
+    // There's really only one boat race - ignore the spaces between the numbers on each line   .
     // Version 2
     @Override
     public long part2() {

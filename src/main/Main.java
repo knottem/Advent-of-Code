@@ -14,7 +14,8 @@ public class Main {
         //days.add(new Day03());
         //days.add(new Day04());
         //days.add(new Day05());
-        days.add(new Day06());
+        //days.add(new Day06());
+        days.add(new Day07());
 
 
         for (Day day : days) {
