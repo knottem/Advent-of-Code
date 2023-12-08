@@ -8,10 +8,11 @@ import java.util.stream.IntStream;
 public class Day07 extends Day {
 
     public Day07() {
-        super("example2.txt", "07", "2023");
+        super("input.txt", "07", "2023");
     }
 
     private record CardsData(String card, int value) { }
+
     public int[] cardsStrength(String card, boolean part2) {
         List<Integer> cardsList = new ArrayList<>();
         for (int i = 0; i < card.length(); i++) {
@@ -23,13 +24,41 @@ public class Day07 extends Day {
             else if (c == 'T') cardsList.add(10);
             else if (Character.isDigit(c)) cardsList.add(Character.getNumericValue(c));
         }
-        List<Integer> copy = new ArrayList<>(cardsList);
-        int[] result = new int[]{0, copy.get(0), copy.get(1), copy.get(2), copy.get(3), copy.get(4)};
-        // Sort the ranks by frequency, then by value.
+
+        if (part2) {
+            return new int[] { findHighestValue(cardsList, 0)[0], cardsList.get(0), cardsList.get(1), cardsList.get(2), cardsList.get(3), cardsList.get(4)};
+        }
+        return checkCardValue(cardsList);
+    }
+
+    public int[] findHighestValue(List<Integer> cardsList, int index) {
+        if (index == cardsList.size()) {
+            return checkCardValue(new ArrayList<>(cardsList));
+        }
+        int[] highest = new int[] { -1 };
+        if (cardsList.get(index) == -1) {
+            for (int j = 2; j <= 14; j++) {
+                cardsList.set(index, j);
+                int[] result = findHighestValue(cardsList, index + 1);
+                if (result[0] > highest[0]) {
+                    highest = result.clone();
+                    if (highest[0] == 10) {
+                        cardsList.set(index, -1);
+                        return highest;
+                    }
+                }
+                cardsList.set(index, -1);
+            }
+        } else {
+            return findHighestValue(cardsList, index + 1);
+        }
+        return highest;
+    }
+
+    private int[] checkCardValue(List<Integer> cardsList) {
+        int[] result = new int[]{0, cardsList.get(0), cardsList.get(1), cardsList.get(2), cardsList.get(3), cardsList.get(4)};
         cardsList.sort(Comparator.comparingInt((Integer o) ->
                 Collections.frequency(cardsList, o)).thenComparingInt(o -> o));
-
-        // Check for the various hands.
         if (IntStream.rangeClosed(0, 4).mapToObj(cardsList::get).distinct().count() == 1) result[0] = 10;
         else if (IntStream.rangeClosed(1, 4).mapToObj(cardsList::get).distinct().count() == 1) result[0] = 9;
         else if (Objects.equals(cardsList.get(0), cardsList.get(1))
@@ -55,7 +84,6 @@ public class Day07 extends Day {
         int ans = 0;
         for (int i = 0; i < cardsList.size() ; i++) {
             ans += (i + 1) * cardsList.get(i).value;
-            System.out.println(cardsList.get(i).card + " " + cardsList.get(i).value);
         }
         return ans;
     }
@@ -93,6 +121,4 @@ public class Day07 extends Day {
 
         return calculateAnswer(cardsList);
     }
-
-
 }
