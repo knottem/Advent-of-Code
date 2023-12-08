@@ -26,8 +26,12 @@ public class Day08 extends Day {
             instructions.add(new Instruction(line[0], line[2].replace("(", "").replace(",", ""), line[3].replace(")", "")));
         }
         Instruction current = instructions.stream().filter(instruction -> instruction.operation.equals("AAA")).findFirst().get();
+        return stepsFinder(instructions, current, input, "ZZZ");
+    }
+
+    private int stepsFinder(List<Instruction> instructions, Instruction current, List<Character> input, String end) {
         int steps = 0;
-        while(true){
+        while (true) {
             for (Character character : input) {
                 steps++;
                 if (character == 'L') {
@@ -45,17 +49,42 @@ public class Day08 extends Day {
                         }
                     }
                 }
-                if (current.operation.equals("ZZZ")) {
+                if (current.operation.endsWith(end)) {
                     return steps;
                 }
             }
         }
     }
 
+    private long lcm(long x, long y) {
+        long max = Math.max(x, y);
+        long min = Math.min(x, y);
+        long lcm = max;
+        while (lcm % min != 0) {
+            lcm += max;
+        }
+        return lcm;
+    }
 
     @Override
     public long part2() {
-       return 0;
+        List<Character> input = getInput().get(0).chars().mapToObj(c -> (char) c).toList();
+        List<Instruction> instructions = new ArrayList<>();
+        for (int i = 2; i < getInput().size(); i++) {
+            String[] line = getInput().get(i).split(" ");
+            instructions.add(new Instruction(line[0], line[2].replace("(", "").replace(",", ""), line[3].replace(")", "")));
+        }
+
+        List<Instruction> start = instructions.stream().filter(instruction -> instruction.operation.endsWith("A")).collect(Collectors.toList());
+        List<Integer> steps = new ArrayList<>();
+        for (Instruction instruction : start) {
+            steps.add(stepsFinder(instructions, instruction, input, "Z"));
+        }
+        long lcm = 1;
+        for (Integer step : steps) {
+            lcm = lcm(lcm, step);
+        }
+        return lcm;
     }
 
 }
