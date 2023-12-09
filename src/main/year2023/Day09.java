@@ -24,8 +24,8 @@ public class Day09 extends Day {
         return isPart2 ? numbers.get(0) - extrapolate(differences, isPart2) : numbers.get(numbers.size() - 1) + extrapolate(differences, isPart2);
     }
 
-    private boolean isAllZeroes(List<Long> sequence) {
-        return sequence.stream().allMatch(diff -> diff == 0);
+    private boolean isAllZeroes(List<Long> numbers) {
+        return numbers.stream().allMatch(n -> n == 0);
     }
 
     private List<List<Long>> getAllLines() {
