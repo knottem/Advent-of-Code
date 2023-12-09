@@ -1,4 +1,6 @@
+import main.year2022.Day10;
 import template.Day;
+import year2022.Day06;
 import year2023.*;
 
 import java.util.ArrayList;
@@ -13,11 +15,11 @@ public class Main {
         //days.add(new Day02());
         //days.add(new Day03());
         //days.add(new Day04());
-        //days.add(new Day05());
+        days.add(new Day05());
         //days.add(new Day06());
         //days.add(new Day07());
         //days.add(new Day08());
-        days.add(new Day09());
+        //days.add(new Day09());
 
 
         for (Day day : days) {

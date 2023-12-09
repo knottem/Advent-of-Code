@@ -2,7 +2,10 @@ package year2023;
 
 import template.Day;
 
+import java.sql.SQLOutput;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class Day05 extends Day {
 
@@ -39,7 +42,7 @@ public class Day05 extends Day {
             }
         }
         for (String mapType : Arrays.asList("seed-to-soil", "soil-to-fertilizer", "fertilizer-to-water",
-                "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location")){
+                "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location")) {
             seeds = updateList(seeds, mapData.get(mapType));
         }
         return Collections.min(seeds);
@@ -64,9 +67,10 @@ public class Day05 extends Day {
         return updatedList;
     }
 
+
+    // Slow solution, but it works.
     @Override
     public long part2() {
-        List<Long> seeds = new ArrayList<>();
         Map<String, List<Long>> mapData = new HashMap<>();
         mapData.put("seed-to-soil", new ArrayList<>());
         mapData.put("soil-to-fertilizer", new ArrayList<>());
@@ -76,10 +80,16 @@ public class Day05 extends Day {
         mapData.put("temperature-to-humidity", new ArrayList<>());
         mapData.put("humidity-to-location", new ArrayList<>());
         String currentMapType = "";
+
+        long lowestLocation = Long.MAX_VALUE;
+        List<Long> currentSeeds = new ArrayList<>();
+
         for (String line : getInput()) {
             if (line.startsWith("seeds:")) {
                 String[] seedValues = line.substring(7).trim().split(" ");
-                seeds.addAll(Arrays.stream(seedValues).map(Long::parseLong).toList());
+                for (String seedValue : seedValues) {
+                    currentSeeds.add(Long.parseLong(seedValue));
+                }
             } else if (line.endsWith("map:")) {
                 currentMapType = line.substring(0, line.length() - 5).trim();
             } else if (!currentMapType.isEmpty()) {
@@ -87,58 +97,43 @@ public class Day05 extends Day {
                     List<Long> values = Arrays.stream(line.trim().split("\\s+"))
                             .map(Long::parseLong)
                             .toList();
+
                     mapData.get(currentMapType).addAll(values);
-                }
-            }
-        }
-        seeds = updateSeeds(seeds, mapData);
-        return seeds.get(0);
-    }
 
-    private List<Long> updateSeeds(List<Long> seedRanges, Map<String, List<Long>> mapData) {
-        long smallest = Long.MAX_VALUE;
-        List<Long> updatedSeedRanges = new ArrayList<>();
-
-        for (String mapType : Arrays.asList(
-                "seed-to-soil",
-                "soil-to-fertilizer",
-                "fertilizer-to-water",
-                "water-to-light",
-                "light-to-temperature",
-                "temperature-to-humidity",
-                "humidity-to-location")) {
-
-            long localSmallest = Long.MAX_VALUE;
-
-            for (int i = 0; i < seedRanges.size(); i += 2) {
-                long input = seedRanges.get(i);
-                long range = seedRanges.get(i + 1);
-
-                for (long j = 0; j < range; j++) {
-                    long result = input + j;
-                    List<Long> map = mapData.get(mapType);
-                        for (int k = 0; k < map.size(); k += 3) {
-                            long destinationRangeStart = map.get(k);
-                            long sourceRangeStart = map.get(k + 1);
-                            long rangeLength = map.get(k + 2);
-                            if (result >= sourceRangeStart && result < sourceRangeStart + rangeLength) {
-                                result = destinationRangeStart + (result - sourceRangeStart);
-                            }
-                        }
-
-                    if (result < localSmallest) {
-                        localSmallest = result;
-                    }
                 }
             }
 
-            if (localSmallest < smallest) {
-                smallest = localSmallest;
-            }
         }
 
-        updatedSeedRanges.add(smallest);
-        return updatedSeedRanges;
+        int chunkSize = 10000000;
+        for (int i = 0; i < currentSeeds.size(); i += 2) {
+            long seedStart = currentSeeds.get(i);
+            long seedRange = currentSeeds.get(i + 1);
+
+            System.out.println("Current seed: " + seedStart + " with range: " + seedRange);
+
+            for (long chunkStart = seedStart; chunkStart < seedStart + seedRange; chunkStart += chunkSize) {
+                long chunkEnd = Math.min(chunkStart + chunkSize, seedStart + seedRange);
+                System.out.println("Current chunk: " + chunkStart + " -> " + (chunkStart + chunkSize) +
+                        " chunk left: " + (seedStart + seedRange - chunkEnd) + " of seed nr: " + (i+1));
+                List<Long> seeds = LongStream.range(chunkStart, chunkEnd)
+                        .boxed()
+                        .collect(Collectors.toList());
+
+                for (String mapType : Arrays.asList("seed-to-soil", "soil-to-fertilizer", "fertilizer-to-water",
+                        "water-to-light", "light-to-temperature", "temperature-to-humidity", "humidity-to-location")) {
+                    seeds = updateList(seeds, mapData.get(mapType));
+                }
+
+                if (Collections.min(seeds) < lowestLocation) {
+                    long lowestSeed = Collections.min(seeds);
+                    System.out.println("New lowest location: " + lowestSeed);
+                    lowestLocation = lowestSeed;
+                }
+            }
+        }
+        return lowestLocation;
     }
 
 }
+
