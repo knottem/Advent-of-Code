@@ -1,26 +1,14 @@
 package year2019;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import template.Day;
 
-public class Day04java {
+public class Day04 extends Day {
 
-    private int input;
-    private int input2;
+    private final int input = Integer.parseInt(getInput().get(0).substring(0, 6));
+    private final int input2 = Integer.parseInt(getInput().get(0).substring(getInput().get(0).length() - 6));
 
-    public Day04java(String text) {
-        String day = "04";
-        String year = "2019";
-        try {
-            Path path = Path.of("src/resources/" + year + "/" + day + "/" + text);
-            input = Integer.parseInt(Files.readString(path).substring(0, 6));
-            input2 = Integer.parseInt(Files.readString(path).substring(Files.readString(path).length() - 6));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Day04() {
+        super("input.txt", "04", "2019");
     }
     private boolean validPassword(int password){
         String passwordStr = String.valueOf(password);
@@ -59,7 +47,8 @@ public class Day04java {
         return valid;
     }
 
-    public int part1() {
+    @Override
+    public long part1() {
         int count = 0;
         for (int i = input; i < input2; i++) {
             if(validPassword(i)){
@@ -69,7 +58,8 @@ public class Day04java {
         return count;
     }
 
-    public int part2() {
+    @Override
+    public long part2() {
         int count = 0;
         for (int i = input; i < input2; i++) {
             if(validPassword2(i)){

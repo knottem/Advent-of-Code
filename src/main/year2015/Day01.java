@@ -1,26 +1,17 @@
 package year2015;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import template.Day;
 
-public class Day01 {
+public class Day01 extends Day {
 
-    private String input;
 
-    public Day01(String text) {
-        String day = "01"; //day
-        String year = "2015"; //year
-        try{
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readString(Path.of(filePath));
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
+    public Day01() {
+        super("input.txt", "01", "2015");
     }
-    public int part1() {
+
+    @Override
+    public long part1() {
+        String input = getInput().get(0);
         int floor = 0;
         for (int i = 0; i < input.length(); i++) {
             if(input.charAt(i) == '('){
@@ -32,7 +23,9 @@ public class Day01 {
         return floor;
     }
 
-    public int part2() {
+    @Override
+    public long part2() {
+        String input = getInput().get(0);
         int floor = 0;
         int charNumber = 0;
         for (int i = 0; i < input.length(); i++) {

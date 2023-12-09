@@ -1,25 +1,15 @@
 package year2016;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import template.Day;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class Day02 {
+public class Day02  extends Day {
 
-    private List<String> input;
-
-    public Day02(String text) {
-        String day = "02"; //day
-        String year = "2016"; //year
-        try{
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
+    public Day02() {
+        super("input.txt", "02", "2016");
     }
 
     static int[][] key = {
@@ -34,12 +24,13 @@ public class Day02 {
             { 0, 10, 11, 12, 0},
             { 0, 0, 13, 0, 0}};
 
-    public String part1() {
+    @Override
+    public long part1() {
         List<Integer> coordinates = new ArrayList<>();
         coordinates.add(1);
         coordinates.add(1);
         AtomicReference<String> result = new AtomicReference<>("");
-        input.forEach(s -> {
+        getInput().forEach(s -> {
                     for (int i = 0; i < s.length(); i++) {
                         switch (s.charAt(i)) {
                             case 'U' -> {
@@ -66,14 +57,16 @@ public class Day02 {
                     }
                     result.updateAndGet(v -> v + key[coordinates.get(1)][coordinates.get(0)]);
                 });
-        return result.get();
+        System.out.println("Part1: " + result.get());
+        return 0;
     }
 
-    public String part2(){
+    @Override
+    public long part2(){
         int x = 0;
         int y = 2;
         StringBuilder result = new StringBuilder();
-        for (String s : input) {
+        for (String s : getInput()) {
             for (char c : s.toCharArray()) {
                 switch (c) {
                     case 'U' -> y = (y > 0 && key2[y - 1][x] != 0) ? y - 1 : y;
@@ -89,14 +82,9 @@ public class Day02 {
             else if (code == 13) result.append('D');
             else result.append(code);
         }
-        return result.toString();
+        System.out.println("Part2: " + result.toString());
+        return 0;
 
     }
 
-
-    public static void main(String[] args) {
-        Day02 day02 = new Day02("input.txt");
-        System.out.println(day02.part1());
-        System.out.println(day02.part2());
-    }
 }

@@ -1,35 +1,24 @@
 package year2015;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import template.Day;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 //day 3 2015
-public class Day03 {
+public class Day03 extends Day {
 
-    private List<String> input;
-
-    public Day03(String text) {
-        String day = "03"; //day
-        String year = "2015"; //year
-        try{
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
+    public Day03() {
+        super("input.txt", "03", "2015");
     }
 
-
-    public int part1() {
+    @Override
+    public long part1() {
         Set<String> visited = new HashSet<>();
         visited.add("0,0");
         int[] pos = {0, 0};
-        input.forEach(s -> {
+        getInput().forEach(s -> {
             s.chars().forEach(c -> {
                 if (c == '^') {
                     pos[1]++;
@@ -46,13 +35,14 @@ public class Day03 {
         return visited.size();
     }
 
-    public int part2() {
+    @Override
+    public long part2() {
         Set<String> visited = new HashSet<>();
         visited.add("0,0");
         int[] santaPos = {0,0};
         int[] roboPos = {0,0};
         AtomicBoolean useSanta = new AtomicBoolean(true);
-        input.forEach(s -> {
+        getInput().forEach(s -> {
             s.chars().forEach(c -> {
                 if (c == '^') {
                     if(useSanta.get()) santaPos[1]++;
@@ -75,9 +65,4 @@ public class Day03 {
         return visited.size();
     }
 
-    public static void main(String[] args) {
-        Day03 day03 = new Day03("input.txt");
-        System.out.println(day03.part1());
-        System.out.println(day03.part2());
-    }
 }

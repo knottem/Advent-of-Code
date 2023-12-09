@@ -1,28 +1,18 @@
 package year2015;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+import template.Day;
 
-public class Day02 {
+public class Day02 extends Day {
 
-    private List<String> input;
 
-    public Day02(String text) {
-        String day = "02"; //day
-        String year = "2015"; //year
-        try {
-            String filePath = "src/resources/" + year + "/" + day + "/" + text;
-            input = Files.readAllLines(Paths.get(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Day02() {
+        super("input.txt", "02", "2015");
     }
 
-    public int part1() {
+    @Override
+    public long part1() {
         int paper = 0;
-        for (String s : input) {
+        for (String s : getInput()) {
             int length = Integer.parseInt(s.split("x")[0]);
             int width = Integer.parseInt(s.split("x")[1]);
             int height = Integer.parseInt(s.split("x")[2]);
@@ -33,10 +23,10 @@ public class Day02 {
         return paper;
     }
 
-
-    public int part2() {
+    @Override
+    public long part2() {
         int ribbon = 0;
-        for (String s : input) {
+        for (String s : getInput()) {
             int length = Integer.parseInt(s.split("x")[0]);
             int width = Integer.parseInt(s.split("x")[1]);
             int height = Integer.parseInt(s.split("x")[2]);
@@ -47,10 +37,5 @@ public class Day02 {
         return ribbon;
     }
 
-    public static void main(String[] args) {
-        Day02 day02 = new Day02("input.txt");
-        System.out.println("Part 1: " + day02.part1());
-        System.out.println("Part 2: " + day02.part2());
-    }
 }
 

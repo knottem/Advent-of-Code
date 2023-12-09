@@ -1,6 +1,7 @@
 
+
 import template.Day;
-import year2022.*;
+import year2023.*;
 
 
 import java.util.ArrayList;
@@ -11,6 +12,25 @@ public class Main {
     public static void main(String[] args) {
 
         Main main = new Main();
+
+        /*
+        List<Day> days2019 = new ArrayList<>();
+        days2019.add(new Day01());
+        days2019.add(new Day02());
+        days2019.add(new Day03());
+        days2019.add(new Day04());
+
+         */
+
+
+
+        /*
+        List<Day> days2020 = new ArrayList<>();
+        days2020.add(new Day01());
+        days2020.add(new Day04());
+
+         */
+
         /*
         List<Day> days2022 = new ArrayList<>();
         days2022.add(new Day02());
@@ -22,15 +42,15 @@ public class Main {
          */
 
         List<Day> days2023 = new ArrayList<>();
-        //days.add(new Day01());
-        //days.add(new Day02());
-        //days.add(new Day03());
-        //days.add(new Day04());
-        //days.add(new Day05()); //part 2 takes 15min+
-        //days.add(new Day06());
-        //days.add(new Day07());
-        //days.add(new Day08());
-        //days.add(new Day09());
+        days2023.add(new Day01());
+        days2023.add(new Day02());
+        days2023.add(new Day03());
+        days2023.add(new Day04());
+        //days2023.add(new Day05()); //part 2 takes 15min+
+        days2023.add(new Day06());
+        days2023.add(new Day07());
+        days2023.add(new Day08());
+        days2023.add(new Day09());
 
 
         main.printDays(days2023);

@@ -2,11 +2,6 @@ package year2022;
 
 import template.Day;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
 public class Day06 extends Day {
 
     public Day06() {
