@@ -2,8 +2,6 @@ package year2023;
 
 import template.Day;
 
-import java.util.Arrays;
-
 public class Day10 extends Day {
 
     public Day10() {
@@ -89,18 +87,6 @@ public class Day10 extends Day {
             boolean isVerticalDown = (x < pipesMap.length - 1) && isValidConnectingPipe(pipesMap[x][y],pipesMap[x + 1][y], "down");
             boolean isHorizontalLeft = (y > 0) && isValidConnectingPipe(pipesMap[x][y],pipesMap[x][y - 1], "left");
             boolean isHorizontalRight = (y < pipesMap[0].length - 1) && isValidConnectingPipe(pipesMap[x][y],pipesMap[x][y + 1], "right");
-            /*
-            System.out.println("--------------------");
-            System.out.println("For shape " + i);
-            System.out.println("isVerticalUp: " + isVerticalUp);
-            System.out.println("isVerticalDown: " + isVerticalDown);
-            System.out.println("isHorizontalLeft: " + isHorizontalLeft);
-            System.out.println("isHorizontalRight: " + isHorizontalRight);
-            System.out.println("--------------------");
-
-             */
-
-
             if (isVerticalUp && isVerticalDown && isHorizontalLeft && isHorizontalRight) return 7;
             else if (isVerticalUp && isVerticalDown) return 0;
             else if (isHorizontalLeft && isHorizontalRight) return 1;
@@ -129,14 +115,6 @@ public class Day10 extends Day {
                 }
             }
         }
-
-        int[][] array = new int[numRows][numCols];
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numCols; j++) {
-                array[i][j] = 0;
-            }
-        }
-        array[startX][startY] = 1;
         pipesMap[startX][startY] = getStartingPointShape(pipesMap, startX, startY);
         int maxSteps = 0;
         int currentX = startX;
@@ -155,7 +133,6 @@ public class Day10 extends Day {
                 if (newX >= 0 && newX < numRows && newY >= 0 && newY < numCols && !visited[newX][newY]) {
                     if (isValidConnectingPipe(pipesMap[currentX][currentY],pipesMap[newX][newY], getDirection(i))) {
                         visited[newX][newY] = true;
-                        array[newX][newY] = 1;
                         currentX = newX;
                         currentY = newY;
                         maxSteps++;
@@ -163,9 +140,6 @@ public class Day10 extends Day {
                         break;
                     }
                 }
-            }
-            if(currentX == startX && currentY == startY){
-                break;
             }
             if (!moved) {
                 break;

@@ -2,10 +2,6 @@
 
 This repository contains my solutions to the Advent of Code challenges. Advent of Code is an annual event that features a series of coding puzzles that are released daily during the month of December. The puzzles are designed to test your problem-solving skills, algorithmic thinking, and coding abilities.
 
-## How to Use this Repository
-
-Each day's puzzle has its own directory, named according to the day of the month (e.g., day01/, day02/, etc.). Within each directory, you will find the solution code for the puzzle. The code is written in either Kotlin or Java
-
 ## About Advent of Code
 
 Advent of Code is an annual event created by Eric Wastl, a software developer from the United States. The event started in 2015 and has since gained a large following in the coding community. The puzzles are designed to be challenging, but not impossible, and are suitable for programmers of all skill levels.
