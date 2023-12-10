@@ -42,15 +42,16 @@ public class Main {
          */
 
         List<Day> days2023 = new ArrayList<>();
-        days2023.add(new Day01());
-        days2023.add(new Day02());
-        days2023.add(new Day03());
-        days2023.add(new Day04());
+        //days2023.add(new Day01());
+        //days2023.add(new Day02());
+        //days2023.add(new Day03());
+        //days2023.add(new Day04());
         //days2023.add(new Day05()); //part 2 takes 15min+
-        days2023.add(new Day06());
-        days2023.add(new Day07());
-        days2023.add(new Day08());
-        days2023.add(new Day09());
+        //days2023.add(new Day06());
+        //days2023.add(new Day07());
+        //days2023.add(new Day08());
+        //days2023.add(new Day09());
+        days2023.add(new Day10());
 
 
         main.printDays(days2023);
