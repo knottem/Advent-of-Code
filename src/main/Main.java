@@ -51,7 +51,8 @@ public class Main {
         //days2023.add(new Day07());
         //days2023.add(new Day08());
         //days2023.add(new Day09());
-        days2023.add(new Day10());
+        //days2023.add(new Day10());
+        days2023.add(new Day11());
 
 
         main.printDays(days2023);
