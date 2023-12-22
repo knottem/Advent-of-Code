@@ -1,5 +1,3 @@
-
-
 import template.Day;
 import year2023.*;
 
@@ -52,7 +50,8 @@ public class Main {
         //days2023.add(new Day08());
         //days2023.add(new Day09());
         //days2023.add(new Day10());
-        days2023.add(new Day11());
+        //days2023.add(new Day11());
+        days2023.add(new Day15());
 
 
         main.printDays(days2023);
