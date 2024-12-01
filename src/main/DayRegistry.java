@@ -13,16 +13,14 @@ public class DayRegistry {
     }
 
     private static void autoRegisterDays() {
-        String baseDir = "out/Production/Advent-of-code";
+        String baseDir = "out/production/Advent-of-Code"; // Corrected directory name
         for (int year = 2015; year <= 2024; year++) {
             String packageName = "year" + year;
-            String packagePath = baseDir + "/" + packageName.replace('.', '/');
-
+            String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
             File directory = new File(packagePath);
             if (!directory.exists() || !directory.isDirectory()) {
                 continue;
             }
-
             List<Day> days = discoverDaysForYear(packageName, baseDir);
             if (!days.isEmpty()) {
                 daysByYear.put(String.valueOf(year), days);
@@ -30,8 +28,9 @@ public class DayRegistry {
         }
     }
 
+
     private static List<Day> discoverDaysForYear(String packageName, String baseDir) {
-        String packagePath = baseDir + "/" + packageName.replace('.', '/');
+        String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
 
         File directory = new File(packagePath);
         if (!directory.exists() || !directory.isDirectory()) {
