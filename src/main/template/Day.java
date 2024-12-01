@@ -24,7 +24,7 @@ public abstract class Day {
             return Files.readAllLines(
                     Paths.get("src/resources/" + year + "/" + day + "/" + fileName));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.printf("Warning: Failed to read input file for Year %s, Day %s (%s).%n", year, day, fileName);
             return null;
         }
     }

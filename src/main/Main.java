@@ -15,7 +15,7 @@ public class Main {
     private void print2024() {
         List<Day> days2024 = new ArrayList<>();
         days2024.add(new year2024.Day01());
-        //days2024.add(new year2024.Day02());
+        days2024.add(new year2024.Day02());
         //days2024.add(new year2024.Day03());
         //days2024.add(new year2024.Day04());
         //days2024.add(new year2024.Day05());

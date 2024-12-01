@@ -29,22 +29,25 @@ public class Day01 extends Day {
         return result;
     }
 
+
+    // Calculate the similarity score by checking how often each number from the left list appears in the right list.
+    // Multiply each number in the left list by its frequency in the right list and sum up the results.
     @Override
     public long part2() {
         List<List<Integer>> lists = getLists();
         List<Integer> left = lists.get(0);
         List<Integer> right = lists.get(1);
-        Map<Integer, Integer> rightFrequency = new HashMap<>();
-        for (int num : right) {
+        Map<Long, Integer> rightFrequency = new HashMap<>();
+        for (long num : right) {
             rightFrequency.put(num, rightFrequency.getOrDefault(num, 0) + 1);
         }
 
-        long similarityScore = 0;
-        for (int num : left) {
-            similarityScore += (long) num * rightFrequency.getOrDefault(num, 0);
+        long result = 0;
+        for (long num : left) {
+            result += num * rightFrequency.getOrDefault(num, 0);
         }
 
-        return similarityScore;
+        return result;
     }
 
     private List<List<Integer>> getLists (){
