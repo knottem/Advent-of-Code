@@ -28,5 +28,5 @@ out/
 *.iml
 *.xml
 
-src/resources/;
+src/resources/
 
