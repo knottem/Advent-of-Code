@@ -1,3 +1,5 @@
+package utils;
+
 import template.Day;
 
 import java.io.File;
@@ -14,7 +16,7 @@ public class DayRegistry {
 
     private static void autoRegisterDays() {
         String baseDir = "out/production/Advent-of-Code"; // Corrected directory name
-        for (int year = 2015; year <= 2024; year++) {
+        for (int year = 2015; year <= 2030; year++) {
             String packageName = "year" + year;
             String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
             File directory = new File(packagePath);
