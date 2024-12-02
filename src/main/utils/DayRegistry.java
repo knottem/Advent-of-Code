@@ -63,4 +63,8 @@ public class DayRegistry {
     public static List<Day> getDaysForYear(String year) {
         return daysByYear.getOrDefault(year, List.of());
     }
+
+    public static List<String> getRegisteredYears() {
+        return new ArrayList<>(daysByYear.keySet());
+    }
 }

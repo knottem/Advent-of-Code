@@ -2,6 +2,7 @@ package utils;
 
 import template.Day;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class DayRunner {
@@ -62,5 +63,33 @@ public class DayRunner {
                     day.getDay(), day.getYear(), e.getMessage());
         }
         System.out.println();
+    }
+
+    public void executeNewest() {
+        String newestYear = DayRegistry.getRegisteredYears().stream()
+                .max(Comparator.naturalOrder())
+                .orElse(null);
+        if (newestYear == null) {
+            System.out.println("No years registered.");
+            return;
+        }
+        Day newestDay = findNewestDay(newestYear);
+        if (newestDay == null) {
+            System.out.printf("No days found for Year: %s%n", newestYear);
+            return;
+        }
+        System.out.printf("Executing Newest Day: Year %s, Day %s%n", newestDay.getYear(), newestDay.getDay());
+        executeDay(newestDay);
+    }
+
+
+    private Day findNewestDay(String year) {
+        List<Day> days = DayRegistry.getDaysForYear(year);
+        if (days.isEmpty()) {
+            return null;
+        }
+        return days.stream()
+                .max(Comparator.comparingInt(day -> Integer.parseInt(day.getDay())))
+                .orElse(null);
     }
 }

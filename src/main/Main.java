@@ -10,8 +10,7 @@ public class Main {
         //dayRunner.executeYear("2020");
         //dayRunner.executeYear("2022");
         //dayRunner.executeYear("2023", List.of(5));
-        dayRunner.executeYear("2024");
-
-        //dayRunner.executeDay(new year2024.Day01());
+        //dayRunner.executeYear("2024");
+        dayRunner.executeNewest();
     }
 }
