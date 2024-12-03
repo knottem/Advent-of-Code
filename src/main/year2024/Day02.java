@@ -5,6 +5,8 @@ import template.Day;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.ParsingUtils.parseNumbersWithSpaces;
+
 public class Day02 extends Day {
 
     public Day02() {
@@ -19,7 +21,7 @@ public class Day02 extends Day {
         List<String> input = getInput();
         long correct = 0;
         for (String s : input) {
-            List<Long> numbers = parseNumbers(s);
+            List<Long> numbers = parseNumbersWithSpaces(s);
             if (isValidSequence(numbers)) {
                 correct++;
             }
@@ -33,7 +35,7 @@ public class Day02 extends Day {
         List<String> input = getInput();
         long correct = 0;
         for (String s : input) {
-            List<Long> numbers = parseNumbers(s);
+            List<Long> numbers = parseNumbersWithSpaces(s);
             if (isValidSequence(numbers)) {
                 correct++;
                 continue;
@@ -75,13 +77,5 @@ public class Day02 extends Day {
         }
 
         return true;
-    }
-
-    private List<Long> parseNumbers(String s) {
-        List<Long> numbers = new ArrayList<>();
-        for (String number : s.split("\\s+")) {
-            numbers.add(Long.parseLong(number));
-        }
-        return numbers;
     }
 }
