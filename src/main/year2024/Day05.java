@@ -51,16 +51,12 @@ public class Day05 extends Day {
     private List<List<List<Integer>>> getRulesAndBooks() {
         List<List<Integer>> rules = new ArrayList<>();
         List<List<Integer>> books = new ArrayList<>();
-        boolean pairs = true;
+
         for (String line : getInput()){
-            if(line.isEmpty()){
-                pairs = false;
-                continue;
-            }
-            if(pairs){
+            if(line.contains("|")){
                 String[] number = line.split("\\|");
                 rules.add(Arrays.asList(Integer.parseInt(number[0]), Integer.parseInt(number[1])));
-            } else {
+            } else if(line.contains(",")){
                 String[] number = line.split(",");
                 List<Integer> group = new ArrayList<>();
                 for (String num : number) {
@@ -69,6 +65,7 @@ public class Day05 extends Day {
                 books.add(group);
             }
         }
+
         return List.of(rules, books);
     }
 
