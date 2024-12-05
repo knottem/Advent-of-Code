@@ -8,8 +8,14 @@ import java.util.List;
 
 public class Day05 extends Day {
 
+    List<List<Integer>> rules = new ArrayList<>();
+    List<List<Integer>> books = new ArrayList<>();
+
     public Day05() {
         super("input", "05", "2024");
+        List<List<List<Integer>>> rulesAndBooks = getRulesAndBooks();
+        rules = rulesAndBooks.get(0);
+        books = rulesAndBooks.get(1);
     }
 
 
@@ -19,9 +25,6 @@ public class Day05 extends Day {
     // For some reason, the Elves also need to know the middle page number of each update being printed.
     @Override
     public long part1() {
-        List<List<List<Integer>>> rulesAndBooks = getRulesAndBooks();
-        List<List<Integer>> rules = rulesAndBooks.get(0);
-        List<List<Integer>> books = rulesAndBooks.get(1);
         long result = 0;
         for (List<Integer> book : books) {
             if(isValidBook(book, rules)){
@@ -36,9 +39,6 @@ public class Day05 extends Day {
     // The Elves still somehow needs the middle page number after reordering.
     @Override
     public long part2() {
-        List<List<List<Integer>>> rulesAndBooks = getRulesAndBooks();
-        List<List<Integer>> rules = rulesAndBooks.get(0);
-        List<List<Integer>> books = rulesAndBooks.get(1);
         long result = 0;
         for (List<Integer> book : books) {
             if(!isValidBook(book, rules)){
@@ -49,7 +49,6 @@ public class Day05 extends Day {
     }
 
     private List<List<List<Integer>>> getRulesAndBooks() {
-        List<List<List<Integer>>> rulesAndBooks = new ArrayList<>();
         List<List<Integer>> rules = new ArrayList<>();
         List<List<Integer>> books = new ArrayList<>();
         boolean pairs = true;
@@ -70,9 +69,7 @@ public class Day05 extends Day {
                 books.add(group);
             }
         }
-        rulesAndBooks.add(rules);
-        rulesAndBooks.add(books);
-        return rulesAndBooks;
+        return List.of(rules, books);
     }
 
     private boolean isValidBook(List<Integer> book, List<List<Integer>> rules) {
