@@ -61,8 +61,6 @@ public class Day06 extends Day {
                 if (getInput().get(i).charAt(j) != '.') {
                     continue;
                 }
-
-                // Simulate placing an obstruction at (i, j)
                 if (isLoopingWithObstruction(i, j)) {
                     //System.out.println("Found loop: " + loopCounter);
                     loopCounter++;
@@ -89,16 +87,16 @@ public class Day06 extends Day {
 
     //Bruteforce, not really a good solution
     private boolean isLoopingWithObstruction(int obsX, int obsY) {
+        // Modifying the grid so the grid is with a new obstruction
         List<String> modifiedGrid = new ArrayList<>(getInput());
-        StringBuilder row = new StringBuilder(modifiedGrid.get(obsX));
-        row.setCharAt(obsY, '#');
-        modifiedGrid.set(obsX, row.toString());
+        String row = modifiedGrid.get(obsX);
+        modifiedGrid.set(obsX, row.substring(0, obsY) + '#' + row.substring(obsY + 1));
 
         int guardX = guard.get(0), guardY = guard.get(1);
         Set<String> visitedStates = new HashSet<>();
         int direction = 0;
 
-        // Loop until we detect a loop or exits the grid
+        // run until we detect a loop or exits the grid
         while (true) {
             String state = guardX + "," + guardY + "," + direction;
             if (visitedStates.contains(state)) {
