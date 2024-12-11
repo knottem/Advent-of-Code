@@ -9,27 +9,60 @@ import java.util.stream.Collectors;
 public class DayRegistry {
 
     private static final Map<String, List<Day>> daysByYear = new HashMap<>();
+    private static boolean useLatest = false; // Flag to switch between modes
 
-    static {
+    public static void setMode(boolean registerLatest) {
+        useLatest = registerLatest;
+        daysByYear.clear();
         autoRegisterDays();
     }
 
     private static void autoRegisterDays() {
         String baseDir = "out/production/Advent-of-Code"; // Corrected directory name
-        for (int year = 2015; year <= 2030; year++) {
-            String packageName = "year" + year;
-            String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
-            File directory = new File(packagePath);
-            if (!directory.exists() || !directory.isDirectory()) {
-                continue;
+
+        // If useLatest is true, only register the latest day for the most recent year
+        if (useLatest) {
+            String latestYear = String.valueOf(findLatestYear(baseDir));
+            if (latestYear == null) {
+                System.out.println("No latest year found.");
+                return;
             }
-            List<Day> days = discoverDaysForYear(packageName, baseDir);
-            if (!days.isEmpty()) {
-                daysByYear.put(String.valueOf(year), days);
+
+            String packageName = "year" + latestYear;
+            Day latestDay = discoverLatestDayForYear(packageName, baseDir);
+            if (latestDay != null) {
+                daysByYear.put(latestYear, List.of(latestDay));
+                System.out.printf("Registered latest day for %s: Day %s%n", latestYear, latestDay.getDay());
+            }
+        } else {
+            // Otherwise, register all days for all years
+            for (int year = 2015; year <= 2030; year++) {
+                String packageName = "year" + year;
+                String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
+                File directory = new File(packagePath);
+                if (!directory.exists() || !directory.isDirectory()) {
+                    continue;
+                }
+
+                List<Day> days = discoverDaysForYear(packageName, baseDir);
+                if (!days.isEmpty()) {
+                    daysByYear.put(String.valueOf(year), days);
+                    System.out.printf("Registered all days for %s: %s%n", year,
+                            days.stream().map(Day::getDay).collect(Collectors.joining(", ")));
+                }
             }
         }
     }
 
+    private static int findLatestYear(String baseDir) {
+        return Arrays.stream(Objects.requireNonNull(new File(baseDir).listFiles()))
+                .map(File::getName)
+                .filter(name -> name.startsWith("year"))
+                .map(name -> name.replace("year", ""))
+                .mapToInt(Integer::parseInt)
+                .max()
+                .orElseThrow(() -> new IllegalStateException("No valid year directories found."));
+    }
 
     private static List<Day> discoverDaysForYear(String packageName, String baseDir) {
         String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
@@ -46,6 +79,25 @@ public class DayRegistry {
                 .map(className -> loadDayClass(packageName + "." + className))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    private static Day discoverLatestDayForYear(String packageName, String baseDir) {
+        String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
+
+        File directory = new File(packagePath);
+        if (!directory.exists() || !directory.isDirectory()) {
+            System.err.printf("Directory not found for package: %s%n", packageName);
+            return null;
+        }
+
+        return Arrays.stream(Objects.requireNonNull(directory.listFiles()))
+                .filter(file -> file.getName().endsWith(".class"))
+                .map(file -> file.getName().replace(".class", ""))
+                .sorted(Comparator.reverseOrder()) // Sort descending to get the latest day
+                .map(className -> loadDayClass(packageName + "." + className))
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 
     private static Day loadDayClass(String className) {

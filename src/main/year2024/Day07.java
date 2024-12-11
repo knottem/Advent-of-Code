@@ -24,7 +24,7 @@ public class Day07 extends Day {
     }
 
     // The concatenation operator (||) combines the digits from its left and right inputs into a single number.
-    // For example, 12 || 345 would become 12345. All operators are still evaluated left-to-right.
+    // For example.txt, 12 || 345 would become 12345. All operators are still evaluated left-to-right.
     @Override
     public long part2() {
         return solvePart(true);

@@ -21,9 +21,11 @@ public abstract class Day {
 
     private List<String> readInputFile() {
         try {
+            //System.out.println("Reading input file: " + fileName + " for day " + day + " in year " + year);
             String fullPath = String.format("src/resources/%s/%s/%s", year, day, fileName.endsWith(".txt") ? fileName : fileName + ".txt");
             return Files.readAllLines(Paths.get(fullPath));
         } catch (IOException e) {
+            System.err.println("Failed to read input file: " + fileName + " for day " + day + " in year " + year);
             return List.of();
         }
     }
