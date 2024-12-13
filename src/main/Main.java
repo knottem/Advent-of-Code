@@ -6,13 +6,9 @@ public class Main {
     public static void main(String[] args) {
         DayRegistry.setMode(true); // Latest mode
         DayRunner dayRunner = new DayRunner();
-        //dayRunner.executeYear("2015");
-        //dayRunner.executeYear("2016");
-        //dayRunner.executeYear("2019");
-        //dayRunner.executeYear("2020");
-        //dayRunner.executeYear("2022");
-        //dayRunner.executeYear("2023", List.of(5));
-        //dayRunner.executeYear("2024");
-        dayRunner.executeNewest();
+        dayRunner.executeYear("2024");
+        //dayRunner.executeNewest();
+
+        //dayRunner.executeDay(new year2022.Day06());
     }
 }

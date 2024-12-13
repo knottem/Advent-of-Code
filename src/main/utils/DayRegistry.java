@@ -22,19 +22,16 @@ public class DayRegistry {
 
         // If useLatest is true, only register the latest day for the most recent year
         if (useLatest) {
+            System.out.println("Latest mode enabled.");
             String latestYear = String.valueOf(findLatestYear(baseDir));
-            if (latestYear == null) {
-                System.out.println("No latest year found.");
-                return;
-            }
 
             String packageName = "year" + latestYear;
             Day latestDay = discoverLatestDayForYear(packageName, baseDir);
             if (latestDay != null) {
                 daysByYear.put(latestYear, List.of(latestDay));
-                System.out.printf("Registered latest day for %s: Day %s%n", latestYear, latestDay.getDay());
             }
         } else {
+            System.out.println("Registering all days mode enabled.");
             // Otherwise, register all days for all years
             for (int year = 2015; year <= 2030; year++) {
                 String packageName = "year" + year;
@@ -47,8 +44,6 @@ public class DayRegistry {
                 List<Day> days = discoverDaysForYear(packageName, baseDir);
                 if (!days.isEmpty()) {
                     daysByYear.put(String.valueOf(year), days);
-                    System.out.printf("Registered all days for %s: %s%n", year,
-                            days.stream().map(Day::getDay).collect(Collectors.joining(", ")));
                 }
             }
         }
