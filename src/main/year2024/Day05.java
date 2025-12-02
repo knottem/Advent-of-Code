@@ -13,9 +13,7 @@ public class Day05 extends Day {
 
     public Day05() {
         super("input", "05", "2024");
-        List<List<List<Integer>>> rulesAndBooks = getRulesAndBooks();
-        rules = rulesAndBooks.get(0);
-        books = rulesAndBooks.get(1);
+        getRulesAndBooks();
     }
 
 
@@ -27,7 +25,7 @@ public class Day05 extends Day {
     public long part1() {
         long result = 0;
         for (List<Integer> book : books) {
-            if(isValidBook(book, rules)){
+            if(isValidBook(book)){
                 result += book.get(book.size() / 2);
             }
         }
@@ -41,17 +39,14 @@ public class Day05 extends Day {
     public long part2() {
         long result = 0;
         for (List<Integer> book : books) {
-            if(!isValidBook(book, rules)){
-                result += reorderBook(book, rules).get(book.size() / 2);
+            if(!isValidBook(book)){
+                result += reorderBook(book);
             }
         }
         return result;
     }
 
-    private List<List<List<Integer>>> getRulesAndBooks() {
-        List<List<Integer>> rules = new ArrayList<>();
-        List<List<Integer>> books = new ArrayList<>();
-
+    private void getRulesAndBooks() {
         for (String line : getInput()){
             if(line.contains("|")){
                 String[] number = line.split("\\|");
@@ -65,12 +60,11 @@ public class Day05 extends Day {
                 books.add(group);
             }
         }
-
-        return List.of(rules, books);
     }
 
-    private boolean isValidBook(List<Integer> book, List<List<Integer>> rules) {
+    private boolean isValidBook(List<Integer> book) {
         for (List<Integer> rule : rules) {
+            // indexOf returns -1 if not found
             int firstIndex = book.indexOf(rule.get(0));
             int secondIndex = book.indexOf(rule.get(1));
 
@@ -81,13 +75,14 @@ public class Day05 extends Day {
         return true;
     }
 
-    private List<Integer> reorderBook(List<Integer> book, List<List<Integer>> rules) {
+    private int reorderBook(List<Integer> book) {
         List<Integer> reordered = new ArrayList<>(book);
         boolean changed;
-        // we know a rule will change so it's safe to make a do loop
+
         do {
             changed = false;
             for (List<Integer> rule : rules) {
+                // indexOf returns -1 if not found
                 int firstIndex = reordered.indexOf(rule.get(0));
                 int secondIndex = reordered.indexOf(rule.get(1));
 
@@ -99,7 +94,7 @@ public class Day05 extends Day {
             }
         } while (changed);
 
-        return reordered;
+        return reordered.get(reordered.size() / 2);
     }
 
 }

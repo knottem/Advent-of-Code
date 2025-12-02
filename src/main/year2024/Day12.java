@@ -2,48 +2,29 @@ package year2024;
 
 import template.Day;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 public class Day12 extends Day {
 
+    char[][] grid;
+
     public Day12() {
-        super("input", "12", "2024");
+        super("example", "12", "2024");
+        grid = buildGrid();
     }
 
     @Override
     public long part1() {
-
-        int rows = getInput().size();
-        int cols = getInput().get(0).length();
-
-        char[][] grid = buildGrid(rows, cols);
-        boolean[][] visited = new boolean[rows][cols];
-
-        Map<Character, Integer> totalCost = new HashMap<>();
-
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (!visited[row][col]) {
-                    char currentChar = grid[row][col];
-
-                    // Calculate area and perimeter for this region
-                    int[] regionStats = calculateRegion(grid, visited, row, col, currentChar);
-                    int area = regionStats[0];
-                    int perimeter = regionStats[1];
-                    int cost = area * perimeter;
-
-                    // Accumulate the total cost for this character
-                    totalCost.put(currentChar, totalCost.getOrDefault(currentChar, 0) + cost);
-                }
-            }
-        }
-
-        // Compute and print the total cost for all regions
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
         long totalPrice = 0;
-        for (Map.Entry<Character, Integer> entry : totalCost.entrySet()) {
-            totalPrice += entry.getValue();
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                // if we haven't visited this plot yet, it's a new region
+                if (!visited[row][col]) {
+                    totalPrice += calculateRegion(visited, row, col);
+                }
+
+            }
         }
         return totalPrice;
     }
@@ -53,7 +34,9 @@ public class Day12 extends Day {
         return 0;
     }
 
-    private char[][] buildGrid(int rows, int cols) {
+    private char[][] buildGrid() {
+        int rows = getInput().size();
+        int cols = getInput().get(0).length();
         char[][] grid = new char[rows][cols];
         for (int i = 0; i < rows; i++) {
             grid[i] = getInput().get(i).toCharArray();
@@ -61,14 +44,15 @@ public class Day12 extends Day {
         return grid;
     }
 
-    private static int[] calculateRegion(char[][] grid, boolean[][] visited, int startRow, int startCol,
-                                         char targetChar) {
+    private long calculateRegion(boolean[][] visited, int startRow, int startCol) {
+
+        char targetChar = grid[startRow][startCol];
 
         int[] dRow = {-1, 1, 0, 0};
         int[] dCol = {0, 0, -1, 1};
 
-        int area = 0; // Count of plots
-        int perimeter = 0; // Count of external edges
+        long area = 0; // Count of plots
+        long perimeter = 0; // Count of external edges
 
         Stack<int[]> stack = new Stack<>();
         stack.push(new int[]{startRow, startCol});
@@ -96,7 +80,6 @@ public class Day12 extends Day {
                 }
             }
         }
-
-        return new int[]{area, perimeter};
+        return area * perimeter;
     }
 }
