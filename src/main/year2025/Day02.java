@@ -27,8 +27,9 @@ public class Day02 extends Day {
 
     private boolean invalidNumber(String number) {
         if(number.startsWith("0")) return true;
-        String firstHalf = number.substring(0, number.length() / 2);
-        String secondHalf = number.substring(number.length() / 2);
+        int half = number.length() / 2;
+        String firstHalf = number.substring(0, half);
+        String secondHalf = number.substring(half);
         return firstHalf.equals(secondHalf);
     }
 
@@ -50,9 +51,11 @@ public class Day02 extends Day {
         int length = number.length();
         for (int block = 1; block <= length / 2; block++) {
             if (length % block != 0) continue;
-            StringBuilder string = new StringBuilder();
-            for (long i = 0; i < length / block; i++) string.append(number, 0, block);
-            if (string.toString().equals(number)) return true;
+            StringBuilder sb = new StringBuilder();
+            for (long i = 0; i < length / block; i++) {
+                sb.append(number, 0, block);
+            }
+            if (sb.toString().equals(number)) return true;
         }
         return false;
     }
