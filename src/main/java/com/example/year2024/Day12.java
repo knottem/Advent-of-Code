@@ -12,7 +12,7 @@ public class Day12 extends Day {
     char[][] grid;
 
     public Day12() {
-        super("example", "12", "2024");
+        super("12", "2024");
         grid = buildGrid(getInput());
     }
 

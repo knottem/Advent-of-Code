@@ -5,7 +5,7 @@ import com.example.template.Day;
 public class Day01 extends Day {
 
     public Day01(){
-        super("input", "01", "2025");
+        super("01", "2025");
     }
 
     @Override

@@ -32,6 +32,10 @@ public abstract class Day {
         defaultFileName = "example";
     }
 
+    public static void useExample(String fileName) {
+        defaultFileName = fileName;
+    }
+
     private List<String> readInputFile() {
         try {
             //System.out.println("Reading input file: " + fileName + " for day " + day + " in year " + year);

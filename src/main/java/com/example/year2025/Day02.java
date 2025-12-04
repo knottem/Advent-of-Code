@@ -8,7 +8,7 @@ import java.util.List;
 public class Day02 extends Day {
 
     public Day02(){
-        super("input", "02", "2025");
+        super("02", "2025");
     }
 
     @Override

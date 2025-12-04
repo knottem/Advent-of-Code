@@ -11,7 +11,7 @@ public class Day03 extends Day {
     List<List<Integer>> convertedList;
 
     public Day03(){
-        super("input", "03", "2025");
+        super("03", "2025");
         convertedList = convertToListListInteger(getInput());
     }
 
