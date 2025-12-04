@@ -2,97 +2,56 @@ package utils;
 
 import template.Day;
 
-import java.io.File;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class DayRegistry {
 
     private static final Map<String, List<Day>> daysByYear = new HashMap<>();
-    private static boolean useLatest = false; // Flag to switch between modes
+
+    private static final int MIN_YEAR = 2015;
+    private static final int MAX_YEAR = 2030;
+    private static final int MAX_DAY = 25;
 
     public static void setMode(boolean registerLatest) {
-        useLatest = registerLatest;
         daysByYear.clear();
-        autoRegisterDays();
-    }
-
-    private static void autoRegisterDays() {
-        String baseDir = "out/production/Advent-of-Code"; // Corrected directory name
-
-        // If useLatest is true, only register the latest day for the most recent year
-        if (useLatest) {
-            System.out.println("Latest mode enabled.");
-            String latestYear = String.valueOf(findLatestYear(baseDir));
-
-            String packageName = "year" + latestYear;
-            Day latestDay = discoverLatestDayForYear(packageName, baseDir);
-            if (latestDay != null) {
-                daysByYear.put(latestYear, List.of(latestDay));
+        if (registerLatest) {
+            Day latest = discoverLatestDay();
+            if (latest != null) {
+                daysByYear.put(latest.getYear(), List.of(latest));
             }
         } else {
             System.out.println("Registering all days mode enabled.");
-            // Otherwise, register all days for all years
-            for (int year = 2015; year <= 2030; year++) {
-                String packageName = "year" + year;
-                String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
-                File directory = new File(packagePath);
-                if (!directory.exists() || !directory.isDirectory()) {
-                    continue;
-                }
+            autoRegisterDays();
+        }
+    }
 
-                List<Day> days = discoverDaysForYear(packageName, baseDir);
-                if (!days.isEmpty()) {
-                    daysByYear.put(String.valueOf(year), days);
+    private static void autoRegisterDays() {
+        for (int year = MIN_YEAR; year <= MAX_YEAR; year++) {
+            List<Day> days = new ArrayList<>();
+            for (int day = 1; day <= MAX_DAY; day++) {
+                String className = String.format("year%d.Day%02d", year, day);
+                Day d = loadDayClass(className);
+                if (d != null) {
+                    days.add(d);
                 }
+            }
+            if (!days.isEmpty()) {
+                daysByYear.put(String.valueOf(year), days);
             }
         }
     }
 
-    private static int findLatestYear(String baseDir) {
-        return Arrays.stream(Objects.requireNonNull(new File(baseDir).listFiles()))
-                .map(File::getName)
-                .filter(name -> name.startsWith("year"))
-                .map(name -> name.replace("year", ""))
-                .mapToInt(Integer::parseInt)
-                .max()
-                .orElseThrow(() -> new IllegalStateException("No valid year directories found."));
-    }
-
-    private static List<Day> discoverDaysForYear(String packageName, String baseDir) {
-        String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
-
-        File directory = new File(packagePath);
-        if (!directory.exists() || !directory.isDirectory()) {
-            System.err.printf("Directory not found for package: %s%n", packageName);
-            return List.of();
+    private static Day discoverLatestDay() {
+        for (int year = MAX_YEAR; year >= MIN_YEAR; year--) {
+            for (int day = MAX_DAY; day >= 1; day--) {
+                String className = String.format("year%d.Day%02d", year, day);
+                Day d = loadDayClass(className);
+                if (d != null) {
+                    return d;
+                }
+            }
         }
-
-        return Arrays.stream(Objects.requireNonNull(directory.listFiles()))
-                .filter(file -> file.getName().endsWith(".class"))
-                .map(file -> file.getName().replace(".class", ""))
-                .map(className -> loadDayClass(packageName + "." + className))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
-    private static Day discoverLatestDayForYear(String packageName, String baseDir) {
-        String packagePath = baseDir + File.separator + packageName.replace('.', File.separatorChar);
-
-        File directory = new File(packagePath);
-        if (!directory.exists() || !directory.isDirectory()) {
-            System.err.printf("Directory not found for package: %s%n", packageName);
-            return null;
-        }
-
-        return Arrays.stream(Objects.requireNonNull(directory.listFiles()))
-                .filter(file -> file.getName().endsWith(".class"))
-                .map(file -> file.getName().replace(".class", ""))
-                .sorted(Comparator.reverseOrder()) // Sort descending to get the latest day
-                .map(className -> loadDayClass(packageName + "." + className))
-                .filter(Objects::nonNull)
-                .findFirst()
-                .orElse(null);
+        return null;
     }
 
     private static Day loadDayClass(String className) {
@@ -101,8 +60,10 @@ public class DayRegistry {
             if (Day.class.isAssignableFrom(cls)) {
                 return (Day) cls.getDeclaredConstructor().newInstance();
             }
+        } catch (ClassNotFoundException ignored) {
+            // will be a lot of for example Failed to load or instantiate class: year2030.Day25 (year2030.Day25) if we set year 2030
         } catch (Exception e) {
-            System.err.printf("Failed to load or instantiate class: %s%n", className);
+            System.err.printf("Failed to load or instantiate class: %s (%s)%n", className, e.getMessage());
         }
         return null;
     }

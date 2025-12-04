@@ -8,7 +8,7 @@ import static utils.GridUtils.*;
 public class Day04 extends Day {
 
     public Day04(){
-        super("input", "04", "2025");
+        super("04", "2025");
     }
 
     @Override

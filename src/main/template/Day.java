@@ -12,11 +12,24 @@ public abstract class Day {
     private final String fileName;
     private final List<String> input;
 
+    private static String defaultFileName = "input";
+
     public Day(String fileName, String day, String year) {
         this.day = day;
         this.year = year;
         this.fileName = fileName;
         this.input = readInputFile();
+    }
+
+    public Day(String day, String year) {
+        this.day = day;
+        this.year = year;
+        this.fileName = defaultFileName;
+        this.input = readInputFile();
+    }
+
+    public static void useExample() {
+        defaultFileName = "example";
     }
 
     private List<String> readInputFile() {
