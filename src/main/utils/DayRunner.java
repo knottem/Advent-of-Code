@@ -66,6 +66,7 @@ public class DayRunner {
     }
 
     public void executeNewest() {
+        DayRegistry.setMode(true);
         String newestYear = DayRegistry.getRegisteredYears().stream()
                 .max(Comparator.naturalOrder())
                 .orElse(null);
