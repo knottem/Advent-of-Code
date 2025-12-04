@@ -16,7 +16,7 @@ public class Day02 extends Day {
             } else if (text.endsWith("X")) {
                 sum += 1 + 3;
             } else if (text.endsWith("Z")) {
-                sum += 3 + 0;
+                sum += 3;
             }
         } else if (text.startsWith("B")) { // paper
             if (text.endsWith("Y")) {

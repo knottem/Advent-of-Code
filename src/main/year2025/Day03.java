@@ -4,7 +4,7 @@ import template.Day;
 
 import java.util.List;
 
-import static utils.Util.convertToListListInteger;
+import static utils.Generalutils.convertToListListInteger;
 
 public class Day03 extends Day {
 

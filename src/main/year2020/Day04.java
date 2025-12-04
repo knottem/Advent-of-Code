@@ -20,7 +20,7 @@ public class Day04 extends Day {
     }
 
     private List<Map<String, String>> getInputAsMaps() {
-        String fileContents = getInput().stream().collect(Collectors.joining("\n"));
+        String fileContents = String.join("\n", getInput());
         String[] passportStrings = fileContents.split("\n\n");
         return Arrays.stream(passportStrings)
                 .map(passportString -> Arrays.stream(passportString.split("[ \n]"))
@@ -38,34 +38,34 @@ public class Day04 extends Day {
     }
 
     private boolean isValidField(String key, String value) {
-        switch (key) {
-            case "byr":
+        return switch (key) {
+            case "byr" -> {
                 int byr = Integer.parseInt(value);
-                return byr >= 1920 && byr <= 2002;
-            case "iyr":
+                yield byr >= 1920 && byr <= 2002;
+            }
+            case "iyr" -> {
                 int iyr = Integer.parseInt(value);
-                return iyr >= 2010 && iyr <= 2020;
-            case "eyr":
+                yield iyr >= 2010 && iyr <= 2020;
+            }
+            case "eyr" -> {
                 int eyr = Integer.parseInt(value);
-                return eyr >= 2020 && eyr <= 2030;
-            case "hgt":
+                yield eyr >= 2020 && eyr <= 2030;
+            }
+            case "hgt" -> {
                 if (value.endsWith("cm")) {
                     int heightCm = Integer.parseInt(value.substring(0, value.length() - 2));
-                    return heightCm >= 150 && heightCm <= 193;
+                    yield heightCm >= 150 && heightCm <= 193;
                 } else if (value.endsWith("in")) {
                     int heightIn = Integer.parseInt(value.substring(0, value.length() - 2));
-                    return heightIn >= 59 && heightIn <= 76;
+                    yield heightIn >= 59 && heightIn <= 76;
                 }
-                return false;
-            case "hcl":
-                return Pattern.matches("#[0-9a-f]{6}", value);
-            case "ecl":
-                return Pattern.matches("amb|blu|brn|gry|grn|hzl|oth", value);
-            case "pid":
-                return Pattern.matches("[0-9]{9}", value);
-            default:
-                return true; // Ignore unknown fields
-        }
+                yield false;
+            }
+            case "hcl" -> Pattern.matches("#[0-9a-f]{6}", value);
+            case "ecl" -> Pattern.matches("amb|blu|brn|gry|grn|hzl|oth", value);
+            case "pid" -> Pattern.matches("[0-9]{9}", value);
+            default -> true; // Ignore unknown fields
+        };
     }
 
     @Override

@@ -73,7 +73,7 @@ public class Day08 extends Day {
             instructions.add(new Instruction(line[0], line[2].replace("(", "").replace(",", ""), line[3].replace(")", "")));
         }
 
-        List<Instruction> start = instructions.stream().filter(instruction -> instruction.operation.endsWith("A")).collect(Collectors.toList());
+        List<Instruction> start = instructions.stream().filter(instruction -> instruction.operation.endsWith("A")).toList();
         List<Integer> steps = new ArrayList<>();
         for (Instruction instruction : start) {
             steps.add(stepsFinder(instructions, instruction, input, "Z"));

@@ -2,7 +2,6 @@ package year2022;
 
 import template.Day;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 

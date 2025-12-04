@@ -20,10 +20,10 @@ public class Day03 extends Day {
 
             for (int i = 0; i < distance; i++) {
                 switch (direction) {
-                    case 'U' -> current = new Pair<>(current.getFirst(), current.getSecond() + 1);
-                    case 'D' -> current = new Pair<>(current.getFirst(), current.getSecond() - 1);
-                    case 'L' -> current = new Pair<>(current.getFirst() - 1, current.getSecond());
-                    case 'R' -> current = new Pair<>(current.getFirst() + 1, current.getSecond());
+                    case 'U' -> current = new Pair<>(current.first(), current.second() + 1);
+                    case 'D' -> current = new Pair<>(current.first(), current.second() - 1);
+                    case 'L' -> current = new Pair<>(current.first() - 1, current.second());
+                    case 'R' -> current = new Pair<>(current.first() + 1, current.second());
                 }
                 path.add(current);
             }
@@ -40,7 +40,7 @@ public class Day03 extends Day {
         path1.retainAll(path2);
 
         return path1.stream()
-                .mapToInt(pair -> Math.abs(pair.getFirst()) + Math.abs(pair.getSecond()))
+                .mapToInt(pair -> Math.abs(pair.first()) + Math.abs(pair.second()))
                 .min()
                 .orElse(0);
     }

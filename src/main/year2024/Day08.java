@@ -3,7 +3,6 @@ package year2024;
 import template.Day;
 
 import java.util.*;
-import java.util.List;
 
 public class Day08 extends Day {
 

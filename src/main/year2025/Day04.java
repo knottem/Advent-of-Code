@@ -2,8 +2,8 @@ package year2025;
 
 import template.Day;
 
-import static utils.Util.buildGrid;
-import static utils.Util.countNeighbors;
+import static utils.GridUtils.*;
+
 
 public class Day04 extends Day {
 

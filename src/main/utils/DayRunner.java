@@ -42,7 +42,7 @@ public class DayRunner {
         executeYear(year, List.of());
     }
 
-    public void executeDay(Day day) {
+    public static void executeDay(Day day) {
         System.out.printf("Day %s, Year %s, File: %s%n", day.getDay(), day.getYear(), day.getFileName());
         try {
             double start = System.nanoTime();

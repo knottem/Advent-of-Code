@@ -4,7 +4,8 @@ import template.Day;
 
 import java.util.Stack;
 
-import static utils.Util.buildGrid;
+import static utils.GridUtils.buildGrid;
+
 
 public class Day12 extends Day {
 

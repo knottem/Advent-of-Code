@@ -82,7 +82,7 @@ public class Day02  extends Day {
             else if (code == 13) result.append('D');
             else result.append(code);
         }
-        System.out.println("Part2: " + result.toString());
+        System.out.println("Part2: " + result);
         return 0;
 
     }

@@ -11,7 +11,7 @@ public class Day02 extends Day {
        super("input.txt", "02", "2023");
     }
 
-    private class Cube {
+    private static class Cube {
         String color;
         int number;
 

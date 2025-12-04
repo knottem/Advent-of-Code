@@ -1,19 +1,10 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.List;
-// Put shit here that can be useful for other problems
-public class Util {
 
-    private Util() {}
+public class GridUtils {
 
-    public static List<List<Integer>> convertToListListInteger(List<String> input){
-        List<List<Integer>> convertedList = new ArrayList<>();
-        for (String line : input) {
-            convertedList.add(line.chars().mapToObj(Character::getNumericValue).toList());
-        }
-        return convertedList;
-    }
+    private GridUtils() {}
 
     public static char[][] buildGrid(List<String> input) {
         int rows = input.size();
@@ -23,6 +14,10 @@ public class Util {
             grid[i] = input.get(i).toCharArray();
         }
         return grid;
+    }
+
+    public static boolean isInBounds(char[][] grid, int r, int c) {
+        return r >= 0 && r < grid.length && c >= 0 && c < grid[0].length;
     }
 
     public static int countNeighbors(char[][] grid, int row, int col, char target) {
@@ -45,6 +40,4 @@ public class Util {
         }
         return count;
     }
-
-
 }

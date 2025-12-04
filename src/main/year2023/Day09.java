@@ -21,7 +21,7 @@ public class Day09 extends Day {
                 .mapToObj(i -> numbers.get(i + 1) - numbers.get(i))
                 .collect(Collectors.toList());
 
-        return isPart2 ? numbers.get(0) - extrapolate(differences, isPart2) : numbers.get(numbers.size() - 1) + extrapolate(differences, isPart2);
+        return isPart2 ? numbers.get(0) - extrapolate(differences, true) : numbers.get(numbers.size() - 1) + extrapolate(differences, false);
     }
 
     private boolean isAllZeroes(List<Long> numbers) {
