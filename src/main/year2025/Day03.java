@@ -2,18 +2,17 @@ package year2025;
 
 import template.Day;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static utils.Util.convertToListListInteger;
 
 public class Day03 extends Day {
 
-    List<List<Integer>> convertedList = new ArrayList<>();
+    List<List<Integer>> convertedList;
 
     public Day03(){
         super("input", "03", "2025");
-        for (String line : getInput()) {
-            convertedList.add(line.chars().mapToObj(Character::getNumericValue).toList());
-        }
+        convertedList = convertToListListInteger(getInput());
     }
 
     @Override

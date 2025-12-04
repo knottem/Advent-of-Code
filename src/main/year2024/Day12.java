@@ -4,13 +4,15 @@ import template.Day;
 
 import java.util.Stack;
 
+import static utils.Util.buildGrid;
+
 public class Day12 extends Day {
 
     char[][] grid;
 
     public Day12() {
         super("example", "12", "2024");
-        grid = buildGrid();
+        grid = buildGrid(getInput());
     }
 
     @Override
@@ -32,16 +34,6 @@ public class Day12 extends Day {
     @Override
     public long part2() {
         return 0;
-    }
-
-    private char[][] buildGrid() {
-        int rows = getInput().size();
-        int cols = getInput().get(0).length();
-        char[][] grid = new char[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            grid[i] = getInput().get(i).toCharArray();
-        }
-        return grid;
     }
 
     private long calculateRegion(boolean[][] visited, int startRow, int startCol) {
