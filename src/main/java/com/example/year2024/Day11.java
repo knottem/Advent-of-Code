@@ -9,7 +9,7 @@ public class Day11 extends Day {
     List<Long> stones;
 
     public Day11() {
-        super("input", "11", "2024");
+        super("11", "2024");
         stones = Arrays.stream(getInput().get(0).split(" "))
                 .mapToLong(Long::parseLong)
                 .boxed()

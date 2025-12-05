@@ -30,7 +30,7 @@ public class DayRegistry {
         for (int year = MIN_YEAR; year <= MAX_YEAR; year++) {
             List<Day> days = new ArrayList<>();
             for (int day = 1; day <= MAX_DAY; day++) {
-                String className = String.format("year%d.Day%02d", year, day);
+                String className = String.format("%s.year%d.Day%02d", BASE_PACKAGE, year, day);
                 Day d = loadDayClass(className);
                 if (d != null) {
                     days.add(d);

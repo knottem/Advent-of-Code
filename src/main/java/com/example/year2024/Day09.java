@@ -9,7 +9,7 @@ public class Day09 extends Day {
     List<Long> numbers = new ArrayList<>();
 
     public Day09() {
-        super("input", "09", "2024");
+        super("09", "2024");
         String input = getInput().get(0);
         for (int i = 0; i < input.length(); i++) {
             numbers.add(Long.parseLong(String.valueOf(input.charAt(i))));

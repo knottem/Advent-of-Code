@@ -16,7 +16,7 @@ public class Day06 extends Day {
 
 
     public Day06() {
-        super("input", "06", "2024");
+        super("06", "2024");
         rows = getInput().size();
         cols = getInput().get(0).length();
         guard = getGuardPositions();

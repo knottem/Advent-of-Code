@@ -12,7 +12,7 @@ public class Day05 extends Day {
     List<List<Integer>> books = new ArrayList<>();
 
     public Day05() {
-        super("input", "05", "2024");
+        super( "05", "2024");
         getRulesAndBooks();
     }
 

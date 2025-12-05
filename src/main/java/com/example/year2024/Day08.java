@@ -12,7 +12,7 @@ public class Day08 extends Day {
     private final HashMap<Character, ArrayList<Coords>> antennas = new HashMap<>();
 
     public Day08() {
-        super("input", "08", "2024");
+        super("08", "2024");
         initializeMapAndAntennas();
     }
 

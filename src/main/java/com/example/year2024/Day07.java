@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Day07 extends Day {
 
     public Day07() {
-        super("input", "07", "2024");
+        super("07", "2024");
     }
 
     // Each line represents a single equation. The test value appears before the colon on each line;

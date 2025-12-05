@@ -10,7 +10,7 @@ import static com.example.utils.ParsingUtils.parseNumbersWithSpaces;
 public class Day02 extends Day {
 
     public Day02() {
-        super("input", "02", "2024");
+        super("02", "2024");
     }
 
 

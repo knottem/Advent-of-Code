@@ -84,7 +84,7 @@ public class DayRunner {
         executeDay(newestDay);
     }
 
-    public void ensureNewestTestScaffold() {
+    public void ensureNewestTest() {
         DayRegistry.setMode(true);
         String newestYear = DayRegistry.getRegisteredYears().stream()
                 .max(Comparator.naturalOrder())
@@ -104,6 +104,18 @@ public class DayRunner {
                 newestDay.getYear(), newestDay.getDay());
 
         newestDay.ensureExampleAndTests();
+    }
+
+    public void ensureNewestTestForYear(String year) {
+        DayRegistry.setMode(false);
+        List<Day> days = DayRegistry.getDaysForYear(year);
+        if (days.isEmpty()) {
+            System.out.printf("No days found for Year: %s%n", year);
+        }
+        for (Day day : days) {
+            day.ensureExampleAndTests();
+        }
+
     }
 
 

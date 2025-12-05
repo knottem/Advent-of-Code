@@ -12,7 +12,7 @@ public class Day01 extends Day {
     private final List<List<Integer>> list;
 
     public Day01() {
-        super("input", "01", "2024");
+        super("01", "2024");
         if(isInputAvailable()){
             list = getLists();
         } else {

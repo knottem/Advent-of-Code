@@ -11,7 +11,7 @@ public class Day03 extends Day {
     Matcher matcher;
 
     public Day03() {
-        super("input", "03", "2024");
+        super( "03", "2024");
         pattern = Pattern.compile("mul\\((\\d+),(\\d+)\\)");
     }
 

@@ -1,4 +1,4 @@
-package com.example.year2025;
+package com.example.year2024;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,11 +14,11 @@ class Day05Test {
 
     @Test
     void part1() {
-        assertEquals(3, new Day05().part1());
+        assertEquals(143, new Day05().part1());
     }
 
     @Test
     void part2() {
-        assertEquals(14, new Day05().part2());
+        assertEquals(123, new Day05().part2());
     }
 }

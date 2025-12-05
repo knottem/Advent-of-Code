@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static com.example.network.ExampleDownloader.*;
+import static com.example.network.TestClassGenerator.writeTestClass;
 
 public abstract class Day {
 

@@ -5,7 +5,7 @@ import com.example.template.Day;
 public class Day04 extends Day {
 
     public Day04() {
-        super("input", "04", "2024");
+        super("04", "2024");
     }
 
     private final int[][] DIRECTIONS = {

@@ -11,8 +11,7 @@ public class Day10 extends Day {
     List<List<Long>> map;
 
     public Day10() {
-        super("input", "10", "2024");
-        map = convertToLongListListGrid(getInput());
+        super("10", "2024");
     }
 
 
@@ -23,7 +22,8 @@ public class Day10 extends Day {
     // - Sum up the total number of reachable peaks from all trailheads and return the result.
     @Override
     public long part1() {
-        return findReachable(map, false);
+        getInput().forEach(System.out::println);
+        return findReachable(convertToLongListListGrid(getInput()), false);
     }
 
     // Part 2: Calculate the sum of trailhead ratings
@@ -34,7 +34,7 @@ public class Day10 extends Day {
     // - Sum up the ratings for all trailheads and return the result.
     @Override
     public long part2() {
-        return findReachable(map, true);
+        return findReachable(convertToLongListListGrid(getInput()), true);
     }
 
     private List<List<Long>> convertToLongListListGrid(List<String> mapRows) {
