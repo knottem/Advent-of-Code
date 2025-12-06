@@ -1,16 +1,10 @@
 package com.example.template;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
-import static com.example.network.ExampleDownloader.*;
-import static com.example.network.TestClassGenerator.writeTestClass;
 
 public abstract class Day {
 
@@ -20,6 +14,8 @@ public abstract class Day {
     private final List<String> input;
 
     private static String defaultFileName = "input";
+
+    private static boolean testEnabled = false;
 
     public Day(String fileName, String day, String year) {
         this.day = day;
@@ -43,42 +39,12 @@ public abstract class Day {
         defaultFileName = fileName;
     }
 
-    public void ensureExampleAndTests() {
-        try {
-            Path examplePath = Paths.get(String.format("src/main/resources/%s/%s/%s", year, day, "example.txt"));
-            Path testPath = Paths.get("src/test/java/com/example/", "year" + year, String.format("Day%sTest.java", day));
-            Document example = null;
-
-            boolean exampleMissing = !Files.exists(examplePath);
-            boolean testMissing = !Files.exists(testPath);
-
-            if (exampleMissing) {
-                System.out.printf("Example file %s not found, downloading...%n", examplePath);
-                example = downloadExample(year, day);
-                Files.createDirectories(examplePath.getParent());
-                Files.writeString(examplePath, parseExample(example));
-            } else {
-                System.out.printf("Example file %s already exists%n", examplePath);
-            }
-
-            if (testMissing) {
-                String output = String.format("Example test %s not found", testPath);
-                if (example == null) {
-                    output = output + ", downloading...";
-                    example = downloadExample(year, day);
-                }
-                System.out.println(output);
-                String part1Expected = parseExampleAnswer(example);
-                writeTestClass(year, day, part1Expected);
-            } else {
-                System.out.printf("Example test %s already exists%n", testPath);
-            }
-        } catch (Exception e){
-            System.err.println(e.getMessage());
-        }
+    public static void setTest(boolean test) {
+        testEnabled = test;
     }
 
     private List<String> readInputFile() {
+        if(testEnabled) return List.of();
         try {
             Path path = Paths.get(String.format("src/main/resources/%s/%s/%s", year, day, fileName.endsWith(".txt") ? fileName : fileName + ".txt"));
             if(!Files.exists(path)){

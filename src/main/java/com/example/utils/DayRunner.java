@@ -5,7 +5,13 @@ import com.example.template.Day;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.example.network.TestClassGenerator.generateExampleAndTest;
+
 public class DayRunner {
+
+    public void executeYear(String year) {
+        executeYear(year, List.of());
+    }
 
     public void executeYear(String year, List<Integer> skippedDays) {
         DayRegistry.setMode(false);
@@ -39,8 +45,18 @@ public class DayRunner {
         System.out.println();
     }
 
-    public void executeYear(String year) {
-        executeYear(year, List.of());
+    public void executeNewest() {
+        Day newestDay = getNewestDay();
+        System.out.printf("Executing Newest Day: Year %s, Day %s%n", newestDay.getYear(), newestDay.getDay());
+        executeDay(newestDay);
+    }
+
+    public void ensureNewestTest() {
+        Day.setTest(true);
+        Day newestDay = getNewestDay();
+        System.out.printf("Ensuring example + test class for Year %s, Day %s%n", newestDay.getYear(), newestDay.getDay());
+        generateExampleAndTest(newestDay.getYear(), newestDay.getDay());
+        Day.setTest(false);
     }
 
     public static void executeDay(Day day) {
@@ -66,46 +82,6 @@ public class DayRunner {
         System.out.println();
     }
 
-    public void executeNewest() {
-        DayRegistry.setMode(true);
-        String newestYear = DayRegistry.getRegisteredYears().stream()
-                .max(Comparator.naturalOrder())
-                .orElse(null);
-        if (newestYear == null) {
-            System.out.println("No years registered.");
-            return;
-        }
-        Day newestDay = findNewestDay(newestYear);
-        if (newestDay == null) {
-            System.out.printf("No days found for Year: %s%n", newestYear);
-            return;
-        }
-        System.out.printf("Executing Newest Day: Year %s, Day %s%n", newestDay.getYear(), newestDay.getDay());
-        executeDay(newestDay);
-    }
-
-    public void ensureNewestTest() {
-        DayRegistry.setMode(true);
-        String newestYear = DayRegistry.getRegisteredYears().stream()
-                .max(Comparator.naturalOrder())
-                .orElse(null);
-        if (newestYear == null) {
-            System.out.println("No years registered.");
-            return;
-        }
-
-        Day newestDay = findNewestDay(newestYear);
-        if (newestDay == null) {
-            System.out.printf("No days found for Year: %s%n", newestYear);
-            return;
-        }
-
-        System.out.printf("Ensuring example + test class for Year %s, Day %s%n",
-                newestDay.getYear(), newestDay.getDay());
-
-        newestDay.ensureExampleAndTests();
-    }
-
     public void ensureNewestTestForYear(String year) {
         DayRegistry.setMode(false);
         List<Day> days = DayRegistry.getDaysForYear(year);
@@ -113,11 +89,27 @@ public class DayRunner {
             System.out.printf("No days found for Year: %s%n", year);
         }
         for (Day day : days) {
-            day.ensureExampleAndTests();
+            generateExampleAndTest(day.getYear(), day.getDay());
         }
 
     }
 
+    private Day getNewestDay() {
+        DayRegistry.setMode(true);
+        String newestYear = DayRegistry.getRegisteredYears().stream()
+                .max(Comparator.naturalOrder())
+                .orElse(null);
+        if (newestYear == null) {
+            System.out.println("No years registered.");
+            throw new IllegalStateException("No years registered.");
+        }
+        Day newestDay = findNewestDay(newestYear);
+        if (newestDay == null) {
+            System.out.printf("No days found for Year: %s%n", newestYear);
+            throw new IllegalStateException("No Days registered.");
+        }
+        return newestDay;
+    }
 
     private Day findNewestDay(String year) {
         List<Day> days = DayRegistry.getDaysForYear(year);

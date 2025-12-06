@@ -21,4 +21,5 @@ class Day06Test {
     void part2() {
         assertEquals(3263827L, new Day06().part2());
     }
+
 }

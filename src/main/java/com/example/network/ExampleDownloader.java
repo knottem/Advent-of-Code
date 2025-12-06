@@ -61,8 +61,7 @@ public final class ExampleDownloader {
                 }
             }
         }
-        //Default
-        System.err.println("Cant find codeblock for parsing exampleAnswer: " + doc.title() + ", Generating default");
+        System.err.println("Cant find codeblock for parsing exampleAnswer: " + doc.title());
         return "0";
     }
 

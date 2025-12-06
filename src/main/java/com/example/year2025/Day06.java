@@ -9,15 +9,20 @@ import java.util.regex.Pattern;
 public class Day06 extends Day {
 
     List<String> operators = new ArrayList<>();
-    List<String> numberLines = new ArrayList<>();
+    List<List<Long>> numberRows = new ArrayList<>();//Part 1
+    List<String> numberLines = new ArrayList<>(); //Part2
+
+    Pattern pattern = Pattern.compile("\\s+");
 
     public Day06() {
         super("06", "2025");
         for (String line : getInput()) {
-            List<String> parts = Pattern.compile("\\s+").splitAsStream(line.trim()).toList();
-            if ("*".equals(parts.getFirst()) || "+".equals(parts.getFirst())) {
-                operators.addAll(parts);
+            if (line.startsWith("*") || line.startsWith("+")) {
+                operators.addAll(pattern.splitAsStream(line.trim()).toList());
             } else {
+                numberRows.add(pattern.splitAsStream(line.trim())
+                        .map(Long::parseLong)
+                        .toList());
                 numberLines.add(line);
             }
         }
@@ -25,21 +30,15 @@ public class Day06 extends Day {
 
     @Override
     public long part1() {
-        // converting to rows for part1
-        List<List<Long>> numbersRow = new ArrayList<>();
-        for (String line : numberLines) {
-            numbersRow.add(Pattern.compile("\\s+").splitAsStream(line.trim()).map(Long::parseLong).toList());
-        }
-        // converting to the real numbers from column
         List<List<Long>> numbersCol = new ArrayList<>();
-        for (int c = 0; c < numbersRow.getFirst().size(); c++) {
-            List<Long> column = new ArrayList<>();
-            for (List<Long> longs : numbersRow) {
-                column.add(longs.get(c));
+        for (List<Long> row : numberRows) {
+            for (int col = 0; col < row.size(); col++) {
+                if (numbersCol.size() <= col) {
+                    numbersCol.add(new ArrayList<>());
+                }
+                numbersCol.get(col).add(row.get(col));
             }
-            numbersCol.add(column);
         }
-        //calculate same for both part 1 and 2 (after we actually make the Lists correct)
         return calculateSum(operators, numbersCol);
     }
 

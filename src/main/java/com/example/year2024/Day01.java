@@ -13,11 +13,7 @@ public class Day01 extends Day {
 
     public Day01() {
         super("01", "2024");
-        if(isInputAvailable()){
-            list = getLists();
-        } else {
-            list = new ArrayList<>();
-        }
+        list = getLists();
     }
 
 
