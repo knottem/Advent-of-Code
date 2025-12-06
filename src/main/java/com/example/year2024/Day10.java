@@ -22,7 +22,6 @@ public class Day10 extends Day {
     // - Sum up the total number of reachable peaks from all trailheads and return the result.
     @Override
     public long part1() {
-        getInput().forEach(System.out::println);
         return findReachable(convertToLongListListGrid(getInput()), false);
     }
 
